@@ -20,7 +20,7 @@ async function bazaarconnect() {
     const fuelgabagoolwithcrude = crudegabagoolprice*24 + sulphuriccoal;
     const fuelgabagoolwithverycrude = verycrudegabagoolprice/8 + sulphuriccoal;
     
-    let bestfuelgabagool; // Declare bestfuelgabagool variable outside of the if-else block
+    let bestfuelgabagool; 
     let usedfuelgabagool;
     
     if (fuelgabagoolwithcrude > fuelgabagoolwithverycrude && fuelgabagoolprice > fuelgabagoolwithverycrude) {
