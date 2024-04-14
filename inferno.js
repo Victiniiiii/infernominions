@@ -1,4 +1,4 @@
-//inferno.js
+// inferno.js
 
 async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
@@ -15,19 +15,33 @@ async function bazaarconnect() {
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
 
-    const sulphuriccoalnopeppers = enchantedcoalprice*16+enchantedsulphurprice/4;
-    const sulphuriccoalwithpeppers = chilipepperprice*4+enchantedcoalprice*16+enchantedsulphurprice/12;
+    const sulphuriccoal = enchantedcoalprice*16+enchantedsulphurprice/4;
 
-    const fuelgabagoolwithcrude = crudegabagoolprice*24 + sulphuriccoalnopeppers;
-    const fuelgabagoolwithverycrude = verycrudegabagoolprice/8 + sulphuriccoalnopeppers;
+    const fuelgabagoolwithcrude = crudegabagoolprice*24 + sulphuriccoal;
+    const fuelgabagoolwithverycrude = verycrudegabagoolprice/8 + sulphuriccoal;
+    
+    let bestfuelgabagool; // Declare bestfuelgabagool variable outside of the if-else block
+    let usedfuelgabagool;
+    
+    if (fuelgabagoolwithcrude > fuelgabagoolwithverycrude && fuelgabagoolprice > fuelgabagoolwithverycrude) {
+        bestfuelgabagool = fuelgabagoolwithverycrude;
+        usedfuelgabagool = "very crude";
+    } else if (fuelgabagoolwithcrude < fuelgabagoolwithverycrude && fuelgabagoolprice > fuelgabagoolwithcrude) {
+        bestfuelgabagool = fuelgabagoolwithcrude;
+        usedfuelgabagool = "crude"
+    } else {
+        bestfuelgabagool = fuelgabagoolprice;
+        usedfuelgabagool = "buy order"
+    }
 
-    const hypergoliccraft =  verycrudegabagoolprice * 36 + enchantedcoalprice * 1204 + enchantedsulphurprice * 75.25
+    const heavygabagoolwithcrude = 24 * bestfuelgabagool + sulphuriccoal;
 
-    console.log("Sulphuric coal recipe without peppers cost",sulphuriccoalnopeppers.toFixed(0),"coins and with peppers it costs",sulphuriccoalwithpeppers.toFixed(0),"coins");
+    const hypergoliccraft =  verycrudegabagoolprice * 36 + enchantedcoalprice * 1204 + enchantedsulphurprice * 75.25;
+
     console.log("Crafting fuel gabagool with crude gabagool cost",fuelgabagoolwithcrude.toFixed(0),"coins and crafting it with very crude gabagool cost",fuelgabagoolwithverycrude.toFixed(0),"coins");
     console.log("buy price",hypergolicgabagoolprice,"sell price",hypergolicgabagoolsellprice);
     console.log("crafting hypergolic costs",hypergoliccraft,"and sell order hypergolic gives",hypergolicgabagoolprice,"the crude gabagool costs",verycrudegabagoolprice*36,"coal costs",enchantedcoalprice*1204,"sulphur costs",enchantedsulphurprice*75.25);
+    console.log("heavy gabagool with crude",heavygabagoolwithcrude,"heavy gabagool buy order",heavygabagoolprice,"used",usedfuelgabagool)
 }
 
 bazaarconnect();
-
