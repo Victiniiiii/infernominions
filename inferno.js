@@ -15,10 +15,23 @@ async function bazaarconnect() {
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
 
-    const sulphuriccoal = enchantedcoalprice*16+enchantedsulphurprice/4;
+    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
+    const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
 
-    const fuelgabagoolwithcrude = crudegabagoolprice*24 + sulphuriccoal;
-    const fuelgabagoolwithverycrude = verycrudegabagoolprice/8 + sulphuriccoal;
+    let bestsulphuriccoal;
+    let usedsulphuriccoal;
+
+    if (sulphuriccoalnopeppers>sulphuriccoalwithpeppers){
+        bestsulphuriccoal = sulphuriccoalwithpeppers;
+        usedsulphuriccoal = "With Peppers";
+    }
+    else {
+        bestsulphuriccoal = sulphuriccoalnopeppers;
+        usedsulphuriccoal = "No Peppers";
+    }
+
+    const fuelgabagoolwithcrude = (parseFloat(crudegabagoolprice) * 24 + parseFloat(bestsulphuriccoal)).toFixed(0);
+    const fuelgabagoolwithverycrude = (parseFloat(verycrudegabagoolprice) / 8 + parseFloat(bestsulphuriccoal)).toFixed(0);
     
     let bestfuelgabagool; 
     let usedfuelgabagool;
@@ -28,20 +41,22 @@ async function bazaarconnect() {
         usedfuelgabagool = "very crude";
     } else if (fuelgabagoolwithcrude < fuelgabagoolwithverycrude && fuelgabagoolprice > fuelgabagoolwithcrude) {
         bestfuelgabagool = fuelgabagoolwithcrude;
-        usedfuelgabagool = "crude"
+        usedfuelgabagool = "crude";
     } else {
         bestfuelgabagool = fuelgabagoolprice;
-        usedfuelgabagool = "buy order"
+        usedfuelgabagool = "buy order";
     }
 
-    const heavygabagoolwithcrude = 24 * bestfuelgabagool + sulphuriccoal;
+    const heavygabagoolwithcrude = 24 * parseFloat(bestfuelgabagool) + parseFloat(bestsulphuriccoal);
 
-    const hypergoliccraft =  verycrudegabagoolprice * 36 + enchantedcoalprice * 1204 + enchantedsulphurprice * 75.25;
-
-    console.log("Crafting fuel gabagool with crude gabagool cost",fuelgabagoolwithcrude.toFixed(0),"coins and crafting it with very crude gabagool cost",fuelgabagoolwithverycrude.toFixed(0),"coins");
+    const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(enchantedcoalprice) * 1204 + parseFloat(enchantedsulphurprice) * 75.25).toFixed(0);
+    
+    console.log("Crafting fuel gabagool with crude gabagool cost",fuelgabagoolwithcrude,"coins and crafting it with very crude gabagool cost",fuelgabagoolwithverycrude,"coins");
     console.log("buy price",hypergolicgabagoolprice,"sell price",hypergolicgabagoolsellprice);
-    console.log("crafting hypergolic costs",hypergoliccraft,"and sell order hypergolic gives",hypergolicgabagoolprice,"the crude gabagool costs",verycrudegabagoolprice*36,"coal costs",enchantedcoalprice*1204,"sulphur costs",enchantedsulphurprice*75.25);
-    console.log("heavy gabagool with crude",heavygabagoolwithcrude,"heavy gabagool buy order",heavygabagoolprice,"used",usedfuelgabagool)
+    console.log("crafting hypergolic costs",hypergoliccraft,"and sell order hypergolic gives",hypergolicgabagoolprice,"the crude gabagool costs",verycrudegabagoolprice*36,"coal costs",enchantedcoalprice*1204,"sulphur costs",(enchantedsulphurprice*75.25).toFixed(0));
+    console.log("heavy gabagool with crude",heavygabagoolwithcrude,"heavy gabagool buy order",heavygabagoolprice,"used",usedfuelgabagool);
+    console.log("Best sulphuric coal is",usedsulphuriccoal,"with the price of",bestsulphuriccoal);
+    console.log("chili peppered coal cost",sulphuriccoalwithpeppers,"and with no peppers it costs",sulphuriccoalnopeppers);
 }
 
 bazaarconnect();
