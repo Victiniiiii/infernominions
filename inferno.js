@@ -14,6 +14,9 @@ async function bazaarconnect() {
     const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status.sellPrice.toFixed(0);
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
+
+    // const infernofuelblockprice =
+    // const gabagooldistillateprice =
     
     const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buy.toFixed(0);
     const capsaicineyedropsprice = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.buy.toFixed(0);
