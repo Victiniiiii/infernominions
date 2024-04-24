@@ -20,6 +20,8 @@ async function bazaarconnect() {
     // const tier1fuel =
     // const tier2fuel =
     // const tier3fuel =
+    // const eyedropcraft = 
+    // const tier3andeyedrop =
     
     const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buy.toFixed(0);
     const capsaicineyedropsprice = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.buy.toFixed(0);
