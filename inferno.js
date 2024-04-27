@@ -23,13 +23,13 @@ async function bazaarconnect() {
     // const eyedropcraft = 
     // const tier3andeyedrop =
     
-    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buy.toFixed(0);
-    const capsaicineyedropsprice = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.buy.toFixed(0);
-    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status.buy.toFixed(0);
-    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status.buy.toFixed(0);
-    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status.buy.toFixed(0);
-    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status.buy.toFixed(0);
-    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status.buy.toFixed(0);
+    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buyPrice.toFixed(0);
+    const capsaicineyedropsprice = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.buyPrice.toFixed(0);
+    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status.buyPrice.toFixed(0);
+    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status.buyPrice.toFixed(0);
+    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status.buyPrice.toFixed(0);
+    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status.buyPrice.toFixed(0);
+    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status.buyPrice .toFixed(0);
 
     const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
     const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
