@@ -21,6 +21,8 @@ async function bazaarconnect() {
     // const tier2fuel =
     // const tier3fuel =
     // const eyedropcraft = 
+    // const eyedropbuyprice =
+    // const eyedropbest =
     // const tier3andeyedrop =
     
     const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buyPrice.toFixed(0);
