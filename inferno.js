@@ -9,7 +9,7 @@ async function bazaarconnect() {
     const heavygabagoolprice = data.products[`HEAVY_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
     const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
     const hypergolicgabagoolsellprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
-    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
+    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
 
     const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status.sellPrice.toFixed(0);
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
@@ -67,14 +67,23 @@ async function bazaarconnect() {
 
     const heavygabagoolwithcrude = 24 * parseFloat(bestfuelgabagool) + parseFloat(bestsulphuriccoal);
 
-    const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(enchantedcoalprice) * 1204 + parseFloat(enchantedsulphurprice) * 75.25).toFixed(0);
+    const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(bestsulphuriccoal) * 301).toFixed(0);
+
+    console.log(hypergoliccraft)
+    console.log(verycrudegabagoolprice)
     
     console.log("Crafting fuel gabagool with crude gabagool cost",fuelgabagoolwithcrude,"coins and crafting it with very crude gabagool cost",fuelgabagoolwithverycrude,"coins");
-    console.log("buy price",hypergolicgabagoolprice,"sell price",hypergolicgabagoolsellprice);
-    console.log("crafting hypergolic costs",hypergoliccraft,"and sell order hypergolic gives",hypergolicgabagoolprice,"the crude gabagool costs",verycrudegabagoolprice*36,"coal costs",enchantedcoalprice*1204,"sulphur costs",(enchantedsulphurprice*75.25).toFixed(0));
     console.log("heavy gabagool with crude",heavygabagoolwithcrude,"heavy gabagool buy order",heavygabagoolprice,"used",usedfuelgabagool);
-    console.log("Best sulphuric coal is",usedsulphuriccoal,"with the price of",bestsulphuriccoal);
-    console.log("chili peppered coal cost",sulphuriccoalwithpeppers,"and with no peppers it costs",sulphuriccoalnopeppers);
+
+    var hypergolicgabagoolDiv = document.getElementById("hypergolicgabagool");
+    var hypergolicgabagoolText = 'Crafting hypergolic costs ' + hypergoliccraft + ' and sell order hypergolic gives ' + hypergolicgabagoolprice + " and the buy order gives " + hypergolicgabagoolsellprice +' the crude gabagool costs ' + (verycrudegabagoolprice * 36) + ' sulphuric coal costs ' + (bestsulphuriccoal * 301).toFixed(0);
+    hypergolicgabagoolDiv.innerHTML = hypergolicgabagoolText;
+    var bestsulphuriccoalDiv = document.getElementById("bestsulphuriccoal");
+    var bestsulphuriccoalText = " Best sulphuric coal is " + usedsulphuriccoal + ' with the price of ' + bestsulphuriccoal + " chili peppered coal cost "+sulphuriccoalwithpeppers+" and with no peppers it costs "+sulphuriccoalnopeppers;
+    bestsulphuriccoalDiv.innerHTML = bestsulphuriccoalText;
 }
 
 bazaarconnect();
+
+
+
