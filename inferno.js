@@ -15,8 +15,8 @@ async function bazaarconnect() {
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
 
-    // const infernofuelblockprice =
-    // const gabagooldistillateprice =
+    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status.sellPrice.toFixed(0);
+    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
     // const tier1fuel =
     // const tier2fuel =
     // const tier3fuel =
@@ -39,7 +39,7 @@ async function bazaarconnect() {
     let bestsulphuriccoal;
     let usedsulphuriccoal;
 
-    if (sulphuriccoalnopeppers>sulphuriccoalwithpeppers){
+    if (sulphuriccoalnopeppers>sulphuriccoalwithpeppers) {
         bestsulphuriccoal = sulphuriccoalwithpeppers;
         usedsulphuriccoal = "With Peppers";
     }
