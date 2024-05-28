@@ -4,9 +4,11 @@ async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
     const data = await response.json();
 
+    // BASIC MATERIALS
+
     const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
-    const fuelgabagoolprice = data.products[`FUEL_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
-    const heavygabagoolprice = data.products[`HEAVY_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
+    const fuelgabagoolprice = data.products[`FUEL_GABAGOOL`]?.quick_status.buyPrice.toFixed(0); // TODO kaldır
+    const heavygabagoolprice = data.products[`HEAVY_GABAGOOL`]?.quick_status.buyPrice.toFixed(0); // TODO kaldır
     const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
     const hypergolicgabagoolsellprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
     const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
@@ -14,16 +16,41 @@ async function bazaarconnect() {
     const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status.sellPrice.toFixed(0);
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
+    // const ceramicprice =
+
+    // FUELS 
 
     const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status.sellPrice.toFixed(0);
+
     const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    // const tier1fuel =
-    // const tier2fuel =
-    // const tier3fuel =
+    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+
+    // const t1gabagool =
+    // const t2gabagool =
+    // const t3gabagool =
+
+    // const t1blazerod =
+    // const t2blazerod =
+    // const t3blazerod =
+
+    // const t1glowstone =
+    // const t2glowstone =
+    // const t3glowstone =
+
+    // const t1magmacream =
+    // const t2magmacream =
+    // const t3magmacream =
+
+    // const t1netherwart =
+    // const t2netherwart =
+    // const t3netherwart =
+
     // const eyedropcraft = 
-    // const eyedropbuyprice =
-    // const eyedropbest =
-    // const tier3andeyedrop =
+
+    // CRAFTABLE STUFF
     
     const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buyPrice.toFixed(0);
     const capsaicineyedropsprice = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.buyPrice.toFixed(0);
@@ -33,7 +60,7 @@ async function bazaarconnect() {
     const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status.buyPrice.toFixed(0);
     const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status.buyPrice .toFixed(0);
 
-    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
+    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0); // TODO üste çıkar
     const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
 
     let bestsulphuriccoal;
