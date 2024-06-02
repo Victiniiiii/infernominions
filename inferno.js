@@ -1,5 +1,24 @@
 // inferno.js
 
+document.getElementById('settings-bar').addEventListener('click', function() {
+    document.getElementById('settings').classList.toggle('expanded');
+});
+
+const toggleStates = [false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, true, true, true, true, true];
+
+document.querySelectorAll('.toggle-switch').forEach(function(toggleSwitch, index) {
+    // Set initial state
+    if (toggleStates[index]) {
+        toggleSwitch.classList.add('active');
+    }
+
+    toggleSwitch.addEventListener('click', function() {
+        this.classList.toggle('active');
+        toggleStates[index] = !toggleStates[index];
+        console.log(`Toggle ${index + 1} is now ${toggleStates[index] ? 'ON' : 'OFF'}`);
+    });
+});
+
 async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
     const data = await response.json();
