@@ -126,6 +126,20 @@ async function bazaarconnect() {
     bestsulphuriccoalDiv.innerHTML = bestsulphuriccoalText;
 }
 
+function minionprofits() {
+    const t1minion = 1013;
+    const t2minion = 982;
+    const t3minion = 950;
+    const t4minion = 919;
+    const t5minion = 886;
+    const t6minion = 855;
+    const t7minion = 823;
+    const t8minion = 792;
+    const t9minion = 760;
+    const t10minion = 728;
+    const t11minion = 697;
+}
+
 bazaarconnect();
 
 
