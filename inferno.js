@@ -26,16 +26,14 @@ async function bazaarconnect() {
     // BASIC MATERIALS
 
     const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
-    const fuelgabagoolprice = data.products[`FUEL_GABAGOOL`]?.quick_status.buyPrice.toFixed(0); // TODO kaldır
-    const heavygabagoolprice = data.products[`HEAVY_GABAGOOL`]?.quick_status.buyPrice.toFixed(0); // TODO kaldır
+    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
     const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
     const hypergolicgabagoolsellprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
-    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
 
     const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status.sellPrice.toFixed(0);
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
-    // const ceramicprice =
+    const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status.sellPrice.toFixed(0);
 
     // FUELS 
 
@@ -88,8 +86,7 @@ async function bazaarconnect() {
     if (sulphuriccoalnopeppers>sulphuriccoalwithpeppers) {
         bestsulphuriccoal = sulphuriccoalwithpeppers;
         usedsulphuriccoal = "With Peppers";
-    }
-    else {
+    } else {
         bestsulphuriccoal = sulphuriccoalnopeppers;
         usedsulphuriccoal = "No Peppers";
     }
@@ -100,23 +97,15 @@ async function bazaarconnect() {
     let bestfuelgabagool; 
     let usedfuelgabagool;
     
-    if (fuelgabagoolwithcrude > fuelgabagoolwithverycrude && fuelgabagoolprice > fuelgabagoolwithverycrude) {
+    if (fuelgabagoolwithcrude > fuelgabagoolwithverycrude) {
         bestfuelgabagool = fuelgabagoolwithverycrude;
         usedfuelgabagool = "very crude";
-    } else if (fuelgabagoolwithcrude < fuelgabagoolwithverycrude && fuelgabagoolprice > fuelgabagoolwithcrude) {
+    } else {
         bestfuelgabagool = fuelgabagoolwithcrude;
         usedfuelgabagool = "crude";
-    } else {
-        bestfuelgabagool = fuelgabagoolprice;
-        usedfuelgabagool = "buy order";
-    }
+    } 
 
-    const heavygabagoolwithcrude = 24 * parseFloat(bestfuelgabagool) + parseFloat(bestsulphuriccoal);
-
-    const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(bestsulphuriccoal) * 301).toFixed(0);
-    
-    console.log("Crafting fuel gabagool with crude gabagool cost",fuelgabagoolwithcrude,"coins and crafting it with very crude gabagool cost",fuelgabagoolwithverycrude,"coins");
-    console.log("heavy gabagool with crude",heavygabagoolwithcrude,"heavy gabagool buy order",heavygabagoolprice,"used",usedfuelgabagool);
+    const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(bestsulphuriccoal) * 301).toFixed(0);    
 
     var hypergolicgabagoolDiv = document.getElementById("hypergolicgabagool");
     var hypergolicgabagoolText = 'Crafting hypergolic costs ' + hypergoliccraft + ' and sell order hypergolic gives ' + hypergolicgabagoolprice + " and the buy order gives " + hypergolicgabagoolsellprice +' the crude gabagool costs ' + (verycrudegabagoolprice * 36) + ' sulphuric coal costs ' + (bestsulphuriccoal * 301).toFixed(0);
