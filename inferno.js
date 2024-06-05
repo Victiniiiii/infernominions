@@ -35,48 +35,6 @@ async function bazaarconnect() {
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
     const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status.sellPrice.toFixed(0);
 
-    // FUELS 
-
-    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status.sellPrice.toFixed(0);
-
-    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-
-    // const t1gabagool =
-    // const t2gabagool =
-    // const t3gabagool =
-
-    // const t1blazerod =
-    // const t2blazerod =
-    // const t3blazerod =
-
-    // const t1glowstone =
-    // const t2glowstone =
-    // const t3glowstone =
-
-    // const t1magmacream =
-    // const t2magmacream =
-    // const t3magmacream =
-
-    // const t1netherwart =
-    // const t2netherwart =
-    // const t3netherwart =
-
-    // const eyedropcraft = 
-
-    // CRAFTABLE STUFF
-    
-    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buyPrice.toFixed(0);
-    const capsaicineyedropsprice = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.buyPrice.toFixed(0);
-    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status.buyPrice.toFixed(0);
-    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status.buyPrice.toFixed(0);
-    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status.buyPrice.toFixed(0);
-    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status.buyPrice.toFixed(0);
-    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status.buyPrice .toFixed(0);
-
     const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0); // TODO üste çıkar
     const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
 
@@ -105,6 +63,48 @@ async function bazaarconnect() {
         usedfuelgabagool = "crude";
     } 
 
+    // FUELS 
+
+    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status.sellPrice.toFixed(0);
+    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.sellPrice.toFixed(0);
+
+    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+
+    const t1gabagool = 6 * gabagooldistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t2gabagool = 6 * gabagooldistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + 2 * infernofuelblockprice;
+    const t3gabagool = 6 * gabagooldistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
+
+    const t1blazerod = 6 * blazeroddistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t2blazerod = 6 * blazeroddistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t3blazerod = 6 * blazeroddistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
+
+    const t1glowstone = 6 * glowstonedistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t2glowstone = 6 * glowstonedistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t3glowstone = 6 * glowstonedistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
+
+    const t1magmacream = 6 * magmacreamdistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t2magmacream = 6 * magmacreamdistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t3magmacream = 6 * magmacreamdistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
+
+    const t1netherwart = 6 * netherwartdistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t2netherwart = 6 * netherwartdistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
+    const t3netherwart = 6 * netherwartdistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
+
+    // CRAFTABLE STUFF
+    
+    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buyPrice.toFixed(0);
+    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status.buyPrice.toFixed(0);
+    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status.buyPrice.toFixed(0);
+    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status.buyPrice.toFixed(0);
+    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status.buyPrice.toFixed(0);
+    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status.buyPrice .toFixed(0);
+
+
+
     const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(bestsulphuriccoal) * 301).toFixed(0);    
 
     var hypergolicgabagoolDiv = document.getElementById("hypergolicgabagool");
@@ -116,17 +116,41 @@ async function bazaarconnect() {
 }
 
 function minionprofits() {
-    const t1minion = 1013;
-    const t2minion = 982;
-    const t3minion = 950;
-    const t4minion = 919;
-    const t5minion = 886;
-    const t6minion = 855;
-    const t7minion = 823;
-    const t8minion = 792;
-    const t9minion = 760;
-    const t10minion = 728;
-    const t11minion = 697;
+    const minions = [1013, 982, 950, 919, 886, 855, 823, 792, 760, 728, 697];
+    const minioncount = [18, 36, 54, 72, 90, 108, 126, 144, 162, 180];
+    const beaconlevels = [0, 1, 2, 3, 4, 5];
+    let scorchedcrystal = false;
+    let minionexpander = false;
+    let flycatcher = false;
+    let mithrilinfusion = false;
+    let beaconlevel;
+    let minionlevel;
+    let minioncountt;
+    let fuelquality;
+    let extraspeeds;
+    let apexcount;
+    let usedsite; // Fandom or official wiki rates ?
+    let miniondailyprofit;
+    
+    extraspeeds += minioncount[minioncountt];
+    extraspeeds += beaconlevels[beaconlevel];
+    if (scorchedcrystal == true) { extraspeeds += 1;}
+    if (minionexpander == true) { extraspeeds += 5;} // minionexpander true olunca html'de diğeri false olmalı
+    if (flycatcher == true) {extraspeeds += 20;}
+    if (mithrilinfusion == true) {extraspeeds += 10;}
+    if (usedfuel == tier1) {fuelquality = 11;}
+    else if (usedfuel == tier2) {fuelquality = 16;}
+    else if (usedfuel == tier3) {fuelquality = 21;}
+    else {fuelquality = 1;}
+    if (minionlevel == 10 || minionlevel == 11) {apexcount = 2}
+    else {apexcount = 1}
+
+    let minionactualspeed = 86400 / (( minions[minionlevel] / fuelquality ) / extraspeeds); // this many actions per day
+    if (usedsite == fandom) {
+        miniondailyprofit = 0;
+    } else if (usedsite == wiki) {
+        miniondailyprofit = 0;
+    }
 }
 
 bazaarconnect();
