@@ -1,23 +1,46 @@
 // inferno.js
+function saveToggleStates() {
+    localStorage.setItem('toggleStates', JSON.stringify(toggleStates));
+}
+
+function loadToggleStates() {
+    const savedToggleStates = localStorage.getItem('toggleStates');
+    if (savedToggleStates) {
+        toggleStates = JSON.parse(savedToggleStates);
+    }
+}
 
 document.getElementById('settings-bar').addEventListener('click', function() {
     document.getElementById('settings').classList.toggle('expanded');
 });
 
-const toggleStates = [false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, true, true, true, true, true];
+let toggleStates = [false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true];
+
+window.addEventListener('DOMContentLoaded', function() {
+    loadToggleStates();
+    updateToggleSwitches();
+});
+
+function updateToggleSwitches() {
+    document.querySelectorAll('.toggle-switch').forEach(function(toggleSwitch, index) {
+        if (toggleStates[index]) {
+            toggleSwitch.classList.add('active');
+        } else {
+            toggleSwitch.classList.remove('active');
+        }
+    });
+}
 
 document.querySelectorAll('.toggle-switch').forEach(function(toggleSwitch, index) {
-    // Set initial state
-    if (toggleStates[index]) {
-        toggleSwitch.classList.add('active');
-    }
-
     toggleSwitch.addEventListener('click', function() {
-        this.classList.toggle('active');
+        toggleSwitch.classList.toggle('active');
         toggleStates[index] = !toggleStates[index];
         console.log(`Toggle ${index + 1} is now ${toggleStates[index] ? 'ON' : 'OFF'}`);
+        saveToggleStates(); 
+        bazaarconnect();
     });
 });
+
 
 async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
@@ -25,54 +48,40 @@ async function bazaarconnect() {
 
     // BASIC MATERIALS
 
-    const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
-    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
-    const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.buyPrice.toFixed(0);
-    const hypergolicgabagoolsellprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status.sellPrice.toFixed(0);
+    const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status[toggleStates[4] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status[toggleStates[5] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
-    const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status.sellPrice.toFixed(0);
-    const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status.sellPrice.toFixed(0);
-    const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status.sellPrice.toFixed(0);
-    const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status.sellPrice.toFixed(0);
+    const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status[toggleStates[0] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);;
+    const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status[toggleStates[1] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status[toggleStates[7] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
-    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0); // TODO üste çıkar
+    const vertexprice = data.products[`INFERNO_VERTEX`]?.quick_status[toggleStates[20] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const apexprice = data.products[`INFERNO_APEX`]?.quick_status[toggleStates[21] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const reaperprice = data.products[`REAPER_PEPPER`]?.quick_status[toggleStates[22] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+
+    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
     const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
 
-    let bestsulphuriccoal;
-    let usedsulphuriccoal;
-
-    if (sulphuriccoalnopeppers>sulphuriccoalwithpeppers) {
-        bestsulphuriccoal = sulphuriccoalwithpeppers;
-        usedsulphuriccoal = "With Peppers";
-    } else {
-        bestsulphuriccoal = sulphuriccoalnopeppers;
-        usedsulphuriccoal = "No Peppers";
-    }
-
+    let bestsulphuriccoal = [sulphuriccoalnopeppers > sulphuriccoalwithpeppers ? sulphuriccoalwithpeppers : sulphuriccoalnopeppers];
+    let usedsulphuriccoal = [sulphuriccoalnopeppers > sulphuriccoalwithpeppers ? "With Peppers" : "No Peppers"];
     const fuelgabagoolwithcrude = (parseFloat(crudegabagoolprice) * 24 + parseFloat(bestsulphuriccoal)).toFixed(0);
-    const fuelgabagoolwithverycrude = (parseFloat(verycrudegabagoolprice) / 8 + parseFloat(bestsulphuriccoal)).toFixed(0);
+    const fuelgabagoolwithverycrude = (parseFloat(verycrudegabagoolprice) / 8 + parseFloat(bestsulphuriccoal)).toFixed(0);    
+    let bestfuelgabagool = [fuelgabagoolwithcrude > fuelgabagoolwithverycrude ? fuelgabagoolwithverycrude : fuelgabagoolwithcrude]; 
+    let usedfuelgabagool = [fuelgabagoolwithcrude > fuelgabagoolwithverycrude ? "very crude" : "crude"];
     
-    let bestfuelgabagool; 
-    let usedfuelgabagool;
-    
-    if (fuelgabagoolwithcrude > fuelgabagoolwithverycrude) {
-        bestfuelgabagool = fuelgabagoolwithverycrude;
-        usedfuelgabagool = "very crude";
-    } else {
-        bestfuelgabagool = fuelgabagoolwithcrude;
-        usedfuelgabagool = "crude";
-    } 
 
     // FUELS 
 
-    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status.sellPrice.toFixed(0);
-    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status.sellPrice.toFixed(0);
+    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status[toggleStates[13] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status[toggleStates[3] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
-    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
-    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status.sellPrice.toFixed(0);
+    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status[toggleStates[8] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status[toggleStates[9] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status[toggleStates[10] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status[toggleStates[11] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status[toggleStates[12] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
     const t1gabagool = 6 * gabagooldistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
     const t2gabagool = 6 * gabagooldistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + 2 * infernofuelblockprice;
@@ -96,19 +105,18 @@ async function bazaarconnect() {
 
     // CRAFTABLE STUFF
     
-    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status.buyPrice.toFixed(0);
-    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status.buyPrice.toFixed(0);
-    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status.buyPrice.toFixed(0);
-    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status.buyPrice.toFixed(0);
-    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status.buyPrice.toFixed(0);
-    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status.buyPrice .toFixed(0);
-
-
+    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status[toggleStates[14] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status[toggleStates[15] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status[toggleStates[16] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status[toggleStates[18] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const gummyprice = data.products[`ENCHANTMENREHEATED_GUMMY_POLAR_BEART_CAYENNE_V`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
     const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(bestsulphuriccoal) * 301).toFixed(0);    
 
     var hypergolicgabagoolDiv = document.getElementById("hypergolicgabagool");
-    var hypergolicgabagoolText = 'Crafting hypergolic costs ' + hypergoliccraft + ' and sell order hypergolic gives ' + hypergolicgabagoolprice + " and the buy order gives " + hypergolicgabagoolsellprice +' the crude gabagool costs ' + (verycrudegabagoolprice * 36) + ' sulphuric coal costs ' + (bestsulphuriccoal * 301).toFixed(0);
+    var hypergolicgabagoolText = 'Crafting hypergolic costs ' + hypergoliccraft + ' and  hypergolic gives ' + hypergolicgabagoolprice +' the crude gabagool costs ' + (verycrudegabagoolprice * 36) + ' sulphuric coal costs ' + (bestsulphuriccoal * 301).toFixed(0);
     hypergolicgabagoolDiv.innerHTML = hypergolicgabagoolText;
     var bestsulphuriccoalDiv = document.getElementById("bestsulphuriccoal");
     var bestsulphuriccoalText = " Best sulphuric coal is " + usedsulphuriccoal + ' with the price of ' + bestsulphuriccoal + " chili peppered coal cost "+sulphuriccoalwithpeppers+" and with no peppers it costs "+sulphuriccoalnopeppers;
@@ -126,11 +134,12 @@ function minionprofits() {
     let beaconlevel;
     let minionlevel;
     let minioncountt;
-    let fuelquality;
-    let extraspeeds;
+    let fuelquality = 1;
+    let extraspeeds = 0;
     let apexcount;
     let usedsite; // Fandom or official wiki rates ?
     let miniondailyprofit;
+    let ceramic = 0;
     
     extraspeeds += minioncount[minioncountt];
     extraspeeds += beaconlevels[beaconlevel];
@@ -141,9 +150,11 @@ function minionprofits() {
     if (usedfuel == tier1) {fuelquality = 11;}
     else if (usedfuel == tier2) {fuelquality = 16;}
     else if (usedfuel == tier3) {fuelquality = 21;}
-    else {fuelquality = 1;}
     if (minionlevel == 10 || minionlevel == 11) {apexcount = 2}
     else {apexcount = 1}
+    if (usedfuel == tier1 || usedfuel == tier2 || usedfuel == tier3) {
+        ceramic += ceramicprice;
+    }
 
     let minionactualspeed = 86400 / (( minions[minionlevel] / fuelquality ) / extraspeeds); // this many actions per day
     if (usedsite == fandom) {
