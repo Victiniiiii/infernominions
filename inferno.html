@@ -13,6 +13,7 @@
             backdrop-filter: blur(5px);
             /* TODO: BLUR FOR APPLE-MAC-IPHONE */ 
         }
+
         #settings-bar {
             height: 5vh;
             line-height: 5vh;
@@ -20,6 +21,7 @@
             box-sizing: border-box;
             border: 0.1vw solid white;
         }
+
         #toggle-container {
             height: 0;
             overflow: hidden;
@@ -30,15 +32,18 @@
             align-items: center;
             border: 0.1vw solid white;
         }
+
         #settings.expanded #toggle-container {
             height: 75vh;
         }
+
         .toggle-line {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             width: 100%;
         }
+
         .image-placeholder {
             width: 2vw;
             height: 2vw;
@@ -47,6 +52,7 @@
             line-height: 2vw;
             margin: 1vw;
         }
+
         .toggle-switch {
             position: relative;
             width: 2.4vw;
@@ -56,6 +62,7 @@
             cursor: pointer;
             margin: 0 0.5vw;
         }
+
         .toggle-switch::before {
             content: "";
             position: absolute;
@@ -67,19 +74,89 @@
             border-radius: 50%;
             transition: all 0.3s;
         }
+
         .toggle-switch.active::before {
             left: 1.3vw;
             background-color: green;
         }
+
         .toggle-group {
             display: flex;
             align-items: center;
             margin: 1vw;
             height: 5vh;
         }
+
         .toggle-label {
             font-size: 1.1vw;
         }
+
+        .infernoprofit {
+            width: 80vw;
+            height: 65vh;
+            display: flex;
+            flex-direction: column;
+            margin-top: 5vh;
+            margin-bottom: 5vh;
+        }
+
+        .infernoprofittitle {
+            width: 80vw;
+            height: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1vw;
+            box-sizing: border-box;
+            border: 0.1vw solid white;
+            color: white;
+        }
+
+        .infernoprofitrow {
+            width: 80vw;
+            height: 10vh;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .infernoprofitbox {
+            width: 20vw;
+            height: 10vh;
+            box-sizing: border-box;
+            border: 0.1vw solid white;
+            font-size: 1.5vw;
+            color: white;
+            justify-content: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #minioncount, #miniontier, #infusion {
+            font-size: 1.5vw;
+            margin-left: 1vw;
+            width: 5vw;
+        }
+
+        #fueltype, #usedsite, #upgrades1, #upgrades2 {
+            font-size: 1vw;
+            margin-left: 1vw;
+            width: 9vw;
+        }
+
+        #beaconlevel {
+            font-size: 1vw;
+            margin-left: 1vw;
+            width: 5vw;
+        }
+
+        .infernoprofitresults {
+            width: 80vw;
+            height: 40vh;
+            box-sizing: border-box;
+            border: 0.1vw solid white;
+        }
+
     </style>
     <link rel="icon" href="static/images/vic32.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="static/inferno.css">
@@ -264,8 +341,104 @@
         </div>
     </div>
     
-    <div id="infernominionsprofits">
-        
+    <div class="infernoprofit">
+        <div class="infernoprofittitle">
+            Inferno Minion Profits
+        </div>
+        <div class="infernoprofitrow">
+            <div class="infernoprofitbox">
+                <label for="minioncount">Minion Count:</label>
+                <input type="number" id="minioncount" name="minioncount" min="0">
+            </div>
+            <div class="infernoprofitbox">
+                <label for="miniontier">Minion Tier:</label>
+                <select id="miniontier" name="miniontier">
+                    <option value="t1">T1</option>
+                    <option value="t2">T2</option>
+                    <option value="t3">T3</option>
+                    <option value="t4">T4</option>
+                    <option value="t5">T5</option>
+                    <option value="t6">T6</option>
+                    <option value="t7">T7</option>
+                    <option value="t8">T8</option>
+                    <option value="t9">T9</option>
+                    <option value="t10">T10</option>
+                    <option value="t11">T11</option>
+                </select>
+            </div>
+            <div class="infernoprofitbox">
+                <label for="fueltype">Fuel Type:</label>
+                <select id="fueltype" name="fueltype">
+                    <option value="nothing">Nothing</option>
+                    <option value="t1-gabagool">T1 Gabagool Fuel</option>
+                    <option value="t1-blazerod">T1 Blaze Rod Fuel</option>
+                    <option value="t1-glowstone">T1 Glowstone Fuel</option>
+                    <option value="t1-magmacream">T1 Magma Cream Fuel</option>
+                    <option value="t1-netherwart">T1 Nether Wart Fuel</option>
+                    <option value="t2-gabagool">T2 Gabagool Fuel</option>
+                    <option value="t2-blazerod">T2 Blaze Rod Fuel</option>
+                    <option value="t2-glowstone">T2 Glowstone Fuel</option>
+                    <option value="t2-magmacream">T2 Magma Cream Fuel</option>
+                    <option value="t2-netherwart">T2 Nether Wart Fuel</option>
+                    <option value="t3-gabagool">T3 Gabagool Fuel</option>
+                    <option value="t3-blazerod">T3 Blaze Rod Fuel</option>
+                    <option value="t3-glowstone">T3 Glowstone Fuel</option>
+                    <option value="t3-magmacream">T3 Magma Cream Fuel</option>
+                    <option value="t3-netherwart">T3 Nether Wart Fuel</option>
+                </select>
+            </div>
+            <div class="infernoprofitbox">
+                <label for="usedsite">Used Rates:</label>
+                <select id="usedsite" name="usedsite">
+                    <option value="fandom">Fandom</option>
+                    <option value="wiki">Wiki</option>
+                </select>
+            </div>
+        </div>
+        <div class="infernoprofitrow">
+            <div class="infernoprofitbox">
+                <label for="beaconlevel">Beacon Level:</label>
+                <select id="beaconlevel" name="numbers">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="1s">1 and Scorched</option>
+                    <option value="2">2</option>
+                    <option value="2s">2 and Scorched</option>
+                    <option value="3">3</option>
+                    <option value="3s">3 and Scorched</option>
+                    <option value="4">4</option>
+                    <option value="4s">4 and Scorched</option>
+                    <option value="5">5</option>
+                    <option value="5s">5 and Scorched</option>
+                </select>
+            </div>
+            <div class="infernoprofitbox">
+                <label for="infusion">Mithril Infusion:</label>
+                <select id="infusion" name="infusion">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+            <div class="infernoprofitbox">
+                <label for="upgrades1">Upgrades:</label>
+                <select id="upgrades1" name="upgrades1">
+                    <option value="nothing">Nothing</option>
+                    <option value="super-compacter-3000">Super Compacter 3000</option>
+                    <option value="minion-expander">Minion Expander</option>
+                    <option value="flycatcher">Flycatcher</option>
+                </select>
+            </div>
+            <div class="infernoprofitbox">
+                <label for="upgrades2">Upgrades:</label>
+                <select id="upgrades2" name="upgrades2">
+                    <option value="nothing">Nothing</option>
+                    <option value="super-compacter-3000">Super Compacter 3000</option>
+                    <option value="minion-expander">Minion Expander</option>
+                    <option value="flycatcher">Flycatcher</option>
+                </select>
+            </div>
+        </div>
+        <div class="infernoprofitresults"></div>
     </div>
 
     <div id="infernofuelprices">

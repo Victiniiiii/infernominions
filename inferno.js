@@ -124,8 +124,45 @@ async function bazaarconnect() {
 }
 
 function minionprofits() {
-    const minions = [1013, 982, 950, 919, 886, 855, 823, 792, 760, 728, 697];
-    const minioncount = [18, 36, 54, 72, 90, 108, 126, 144, 162, 180];
+    var htmlminioncount = document.getElementById('minioncount').value;
+    let extraspeedfromminioncount;
+    if (htmlminioncount < 1 || htmlminioncount > 32) {
+        // please input a correct value
+    } else if (htmlminioncount > 0 || htmlminioncount < 11) {extraspeedfromminioncount = htmlminioncount * 18}
+    else if (htmlminioncount > 10 || htmlminioncount < 33) {extraspeedfromminioncount = 180}
+    else {/* give error */}
+
+    var htmlminiontier = document.getElementById('miniontier').value;
+    if (htmlminiontier == "T1") {minionwaitingtime == 1013}
+    else if (htmlminiontier == "T2") {minionwaitingtime == 982}
+    else if (htmlminiontier == "T3") {minionwaitingtime == 950}
+    else if (htmlminiontier == "T4") {minionwaitingtime == 919}
+    else if (htmlminiontier == "T5") {minionwaitingtime == 886}
+    else if (htmlminiontier == "T6") {minionwaitingtime == 855}
+    else if (htmlminiontier == "T7") {minionwaitingtime == 823}
+    else if (htmlminiontier == "T8") {minionwaitingtime == 792}
+    else if (htmlminiontier == "T9") {minionwaitingtime == 760}
+    else if (htmlminiontier == "T10") {minionwaitingtime == 728}
+    else if (htmlminiontier == "T11") {minionwaitingtime == 697}
+
+    var htmlfueltype = document.getElementById("fueltype").value;
+    if (htmlfueltype == "Nothing") {}
+    else if (htmlfueltype == "T1 Gabagool Fuel") {}
+    else if (htmlfueltype == "T1 Blaze Rod Fuel") {}
+    else if (htmlfueltype == "T1 Glowstone Fuel") {}
+    else if (htmlfueltype == "T1 Magma Cream Fuel") {}
+    else if (htmlfueltype == "T1 Nether Wart Fuel") {}
+    else if (htmlfueltype == "T2 Gabagool Fuel") {}
+    else if (htmlfueltype == "T2 Blaze Rod Fuel") {}
+    else if (htmlfueltype == "T2 Glowstone Fuel") {}
+    else if (htmlfueltype == "T2 Magma Cream Fuel") {}
+    else if (htmlfueltype == "T2 Nether Wart Fuel") {}
+    else if (htmlfueltype == "T3 Gabagool Fuel") {}
+    else if (htmlfueltype == "T3 Blaze Rod Fuel") {}
+    else if (htmlfueltype == "T3 Glowstone Fuel") {}
+    else if (htmlfueltype == "T3 Magma Cream Fuel") {}
+    else if (htmlfueltype == "T3 Nether Wart Fuel") {}
+    
     const beaconlevels = [0, 1, 2, 3, 4, 5];
     let scorchedcrystal = false;
     let minionexpander = false;
@@ -136,12 +173,21 @@ function minionprofits() {
     let minioncountt;
     let fuelquality = 1;
     let extraspeeds = 0;
-    let apexcount;
+    
+    var minionTier = document.getElementById('miniontier').value;
+    var apexCount = 0;
+
+    if (minionTier === 't10' || minionTier === 't11') {
+        apexCount = 2;
+    } else if (minionTier) {
+        apexCount = 1;
+    }
+
     let usedsite; // Fandom or official wiki rates ?
     let miniondailyprofit;
     let ceramic = 0;
     
-    extraspeeds += minioncount[minioncountt];
+    extraspeeds += extraspeedfromminioncount;
     extraspeeds += beaconlevels[beaconlevel];
     if (scorchedcrystal == true) { extraspeeds += 1;}
     if (minionexpander == true) { extraspeeds += 5;} // minionexpander true olunca html'de diğeri false olmalı
@@ -156,7 +202,7 @@ function minionprofits() {
         ceramic += ceramicprice;
     }
 
-    let minionactualspeed = 86400 / (( minions[minionlevel] / fuelquality ) / extraspeeds); // this many actions per day
+    let minionactualspeed = 86400 / (( minionwaitingtime / fuelquality ) / extraspeeds); // this many actions per day
     if (usedsite == fandom) {
         miniondailyprofit = 0;
     } else if (usedsite == wiki) {
