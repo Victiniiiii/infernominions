@@ -1,4 +1,6 @@
 // inferno.js
+
+// TODO: Compactors, Numbers cant be negative, T3 profit is very too much from vertexes, Nether wart dist t3 NaN, how much coins under the togglestates
 function saveToggleStates() {
     localStorage.setItem('toggleStates', JSON.stringify(toggleStates));
 }
@@ -38,72 +40,23 @@ document.querySelectorAll('.toggle-switch').forEach(function(toggleSwitch, index
         console.log(`Toggle ${index + 1} is now ${toggleStates[index] ? 'ON' : 'OFF'}`);
         saveToggleStates(); 
         bazaarconnect();
+        minionprofits();
     });
 });
 
+var htmlinfernoresulttext = document.getElementById("infernoprofitresults");
+    htmlinfernoresulttext.innerHTML = "Press the calculate button at the top right to start.    ";
 
 async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
     const data = await response.json();
 
-    // BASIC MATERIALS
-
-    const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status[toggleStates[4] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status[toggleStates[5] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-
-    const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status[toggleStates[0] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);;
-    const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status[toggleStates[1] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status[toggleStates[7] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
     const vertexprice = data.products[`INFERNO_VERTEX`]?.quick_status[toggleStates[20] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const apexprice = data.products[`INFERNO_APEX`]?.quick_status[toggleStates[21] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const reaperprice = data.products[`REAPER_PEPPER`]?.quick_status[toggleStates[22] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-
-    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
-    const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
-
-    let bestsulphuriccoal = [sulphuriccoalnopeppers > sulphuriccoalwithpeppers ? sulphuriccoalwithpeppers : sulphuriccoalnopeppers];
-    let usedsulphuriccoal = [sulphuriccoalnopeppers > sulphuriccoalwithpeppers ? "With Peppers" : "No Peppers"];
-    const fuelgabagoolwithcrude = (parseFloat(crudegabagoolprice) * 24 + parseFloat(bestsulphuriccoal)).toFixed(0);
-    const fuelgabagoolwithverycrude = (parseFloat(verycrudegabagoolprice) / 8 + parseFloat(bestsulphuriccoal)).toFixed(0);    
-    let bestfuelgabagool = [fuelgabagoolwithcrude > fuelgabagoolwithverycrude ? fuelgabagoolwithverycrude : fuelgabagoolwithcrude]; 
-    let usedfuelgabagool = [fuelgabagoolwithcrude > fuelgabagoolwithverycrude ? "very crude" : "crude"];
-    
-
-    // FUELS 
-
-    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status[toggleStates[13] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS`]?.quick_status[toggleStates[3] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-
-    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status[toggleStates[8] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status[toggleStates[9] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status[toggleStates[10] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status[toggleStates[11] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status[toggleStates[12] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-
-    const t1gabagool = 6 * gabagooldistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t2gabagool = 6 * gabagooldistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + 2 * infernofuelblockprice;
-    const t3gabagool = 6 * gabagooldistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
-
-    const t1blazerod = 6 * blazeroddistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t2blazerod = 6 * blazeroddistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t3blazerod = 6 * blazeroddistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
-
-    const t1glowstone = 6 * glowstonedistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t2glowstone = 6 * glowstonedistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t3glowstone = 6 * glowstonedistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
-
-    const t1magmacream = 6 * magmacreamdistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t2magmacream = 6 * magmacreamdistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t3magmacream = 6 * magmacreamdistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
-
-    const t1netherwart = 6 * netherwartdistillateprice + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t2netherwart = 6 * netherwartdistillateprice + bestsulphuriccoal + 24 * bestfuelgabagool + bestfuelgabagool + 2 * infernofuelblockprice;
-    const t3netherwart = 6 * netherwartdistillateprice + 2 * bestsulphuriccoal + 288 * bestfuelgabagool + 2 * infernofuelblockprice;
-
-    // CRAFTABLE STUFF
     
     const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status[toggleStates[14] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status[toggleStates[15] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
@@ -111,106 +64,172 @@ async function bazaarconnect() {
     const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status[toggleStates[18] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const gummyprice = data.products[`ENCHANTMENREHEATED_GUMMY_POLAR_BEART_CAYENNE_V`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const gummyprice = data.products[`REHEATED_GUMMY_POLAR_BEAR`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
 
-    const hypergoliccraft = (parseFloat(verycrudegabagoolprice) * 36 + parseFloat(bestsulphuriccoal) * 301).toFixed(0);    
-
-    var hypergolicgabagoolDiv = document.getElementById("hypergolicgabagool");
-    var hypergolicgabagoolText = 'Crafting hypergolic costs ' + hypergoliccraft + ' and  hypergolic gives ' + hypergolicgabagoolprice +' the crude gabagool costs ' + (verycrudegabagoolprice * 36) + ' sulphuric coal costs ' + (bestsulphuriccoal * 301).toFixed(0);
-    hypergolicgabagoolDiv.innerHTML = hypergolicgabagoolText;
-    var bestsulphuriccoalDiv = document.getElementById("bestsulphuriccoal");
-    var bestsulphuriccoalText = " Best sulphuric coal is " + usedsulphuriccoal + ' with the price of ' + bestsulphuriccoal + " chili peppered coal cost "+sulphuriccoalwithpeppers+" and with no peppers it costs "+sulphuriccoalnopeppers;
-    bestsulphuriccoalDiv.innerHTML = bestsulphuriccoalText;
 }
 
-function minionprofits() {
+async function minionprofits() {
+
+    const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
+    const data = await response.json();
+
+    const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status[toggleStates[0] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);;
+    const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status[toggleStates[1] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status[toggleStates[4] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status[toggleStates[5] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status[toggleStates[7] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const vertexprice = data.products[`INFERNO_VERTEX`]?.quick_status[toggleStates[20] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const apexprice = data.products[`INFERNO_APEX`]?.quick_status[toggleStates[21] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const reaperprice = data.products[`REAPER_PEPPER`]?.quick_status[toggleStates[22] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const magmacreamprice = data.products[`MAGMA_CREAM`]?.quick_status.sellPrice.toFixed(0);
+    const blazerodprice = data.products[`BLAZE_ROD`]?.quick_status.sellPrice.toFixed(0);
+    const netherwartprice = data.products[`NETHER_STALK`]?.quick_status.sellPrice.toFixed(0);
+    const glowstonedustprice = data.products[`GLOWSTONE_DUST`]?.quick_status.sellPrice.toFixed(0);
+
+    const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
+    const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
+    let bestsulphuriccoal = [sulphuriccoalnopeppers > sulphuriccoalwithpeppers ? sulphuriccoalwithpeppers : sulphuriccoalnopeppers];
+    const fuelgabagoolwithcrude = (parseFloat(crudegabagoolprice) * 24 + parseFloat(bestsulphuriccoal)).toFixed(0);
+    const fuelgabagoolwithverycrude = (parseFloat(verycrudegabagoolprice) / 8 + parseFloat(bestsulphuriccoal)).toFixed(0);    
+    let bestfuelgabagool = [fuelgabagoolwithcrude > fuelgabagoolwithverycrude ? fuelgabagoolwithverycrude : fuelgabagoolwithcrude]; 
+
+    let extraspeeds = 0;
+
     var htmlminioncount = document.getElementById('minioncount').value;
-    let extraspeedfromminioncount;
     if (htmlminioncount < 1 || htmlminioncount > 32) {
-        // please input a correct value
-    } else if (htmlminioncount > 0 || htmlminioncount < 11) {extraspeedfromminioncount = htmlminioncount * 18}
-    else if (htmlminioncount > 10 || htmlminioncount < 33) {extraspeedfromminioncount = 180}
-    else {/* give error */}
+        htmlinfernoresulttext.innerHTML = "You must enter a minion count value between 1 and 32.";
+    } else if (htmlminioncount > 0 && htmlminioncount < 11) {extraspeeds += htmlminioncount * 18}
+    else if (htmlminioncount > 10 && htmlminioncount < 33) {extraspeeds += 180}
+    else {console.log("Minion count error.")}
 
     var htmlminiontier = document.getElementById('miniontier').value;
-    if (htmlminiontier == "T1") {minionwaitingtime == 1013}
-    else if (htmlminiontier == "T2") {minionwaitingtime == 982}
-    else if (htmlminiontier == "T3") {minionwaitingtime == 950}
-    else if (htmlminiontier == "T4") {minionwaitingtime == 919}
-    else if (htmlminiontier == "T5") {minionwaitingtime == 886}
-    else if (htmlminiontier == "T6") {minionwaitingtime == 855}
-    else if (htmlminiontier == "T7") {minionwaitingtime == 823}
-    else if (htmlminiontier == "T8") {minionwaitingtime == 792}
-    else if (htmlminiontier == "T9") {minionwaitingtime == 760}
-    else if (htmlminiontier == "T10") {minionwaitingtime == 728}
-    else if (htmlminiontier == "T11") {minionwaitingtime == 697}
+    var apexCount = 0;
+    var minionwaitingtime = 0;
+    if (htmlminiontier == "t1") {minionwaitingtime = 1013; apexCount = 1;}
+    else if (htmlminiontier == "t2") {minionwaitingtime = 982; apexCount = 1;}
+    else if (htmlminiontier == "t3") {minionwaitingtime = 950; apexCount = 1;}
+    else if (htmlminiontier == "t4") {minionwaitingtime = 919; apexCount = 1;}
+    else if (htmlminiontier == "t5") {minionwaitingtime = 886; apexCount = 1;}
+    else if (htmlminiontier == "t6") {minionwaitingtime = 855; apexCount = 1;}
+    else if (htmlminiontier == "t7") {minionwaitingtime = 823; apexCount = 1;}
+    else if (htmlminiontier == "t8") {minionwaitingtime = 792; apexCount = 1;}
+    else if (htmlminiontier == "t9") {minionwaitingtime = 760; apexCount = 1;}
+    else if (htmlminiontier == "t10") {minionwaitingtime = 728; apexCount = 2;}
+    else if (htmlminiontier == "t11") {minionwaitingtime = 697; apexCount = 2;}
+
+    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status[toggleStates[13] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status[toggleStates[8] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status[toggleStates[9] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status[toggleStates[10] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status[toggleStates[11] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status[toggleStates[12] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);       
 
     var htmlfueltype = document.getElementById("fueltype").value;
-    if (htmlfueltype == "Nothing") {}
-    else if (htmlfueltype == "T1 Gabagool Fuel") {}
-    else if (htmlfueltype == "T1 Blaze Rod Fuel") {}
-    else if (htmlfueltype == "T1 Glowstone Fuel") {}
-    else if (htmlfueltype == "T1 Magma Cream Fuel") {}
-    else if (htmlfueltype == "T1 Nether Wart Fuel") {}
-    else if (htmlfueltype == "T2 Gabagool Fuel") {}
-    else if (htmlfueltype == "T2 Blaze Rod Fuel") {}
-    else if (htmlfueltype == "T2 Glowstone Fuel") {}
-    else if (htmlfueltype == "T2 Magma Cream Fuel") {}
-    else if (htmlfueltype == "T2 Nether Wart Fuel") {}
-    else if (htmlfueltype == "T3 Gabagool Fuel") {}
-    else if (htmlfueltype == "T3 Blaze Rod Fuel") {}
-    else if (htmlfueltype == "T3 Glowstone Fuel") {}
-    else if (htmlfueltype == "T3 Magma Cream Fuel") {}
-    else if (htmlfueltype == "T3 Nether Wart Fuel") {}
-    
-    const beaconlevels = [0, 1, 2, 3, 4, 5];
-    let scorchedcrystal = false;
-    let minionexpander = false;
-    let flycatcher = false;
-    let mithrilinfusion = false;
-    let beaconlevel;
-    let minionlevel;
-    let minioncountt;
-    let fuelquality = 1;
-    let extraspeeds = 0;
-    
-    var minionTier = document.getElementById('miniontier').value;
-    var apexCount = 0;
+    var fuelmultiplier = 1;
+    var specialproduction = 0; var specialfueloutput = 0;
+    var checkifitst3 = 0;
+    var expenses = 0;
+    if (htmlfueltype == "nothing") {fuelmultiplier = 1; checkifitst3 = 0;}
+    else if (htmlfueltype == "t1-gabagool") {fuelmultiplier = 11; checkifitst3 = 0; specialfueloutput+= parseFloat(crudegabagoolprice); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(gabagooldistillateprice) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t1-blazerod") {fuelmultiplier = 11; checkifitst3 = 0; specialfueloutput+= parseFloat(blazerodprice); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(blazeroddistillateprice) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t1-glowstone") {fuelmultiplier = 11; checkifitst3 = 0; specialfueloutput+= parseFloat(glowstonedustprice*2.5); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(glowstonedistillateprice) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t1-magmacream") {fuelmultiplier = 11; checkifitst3 = 0; specialfueloutput+= parseFloat(magmacreamprice*2); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(magmacreamdistillateprice) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t1-netherwart") {fuelmultiplier = 11; checkifitst3 = 0; specialfueloutput+= parseFloat(netherwartprice*5); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(netherwartdistillateprice) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t2-gabagool") {fuelmultiplier = 16; checkifitst3 = 0; specialfueloutput+= parseFloat(crudegabagoolprice); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(gabagooldistillateprice) + parseFloat(bestsulphuriccoal) + 24 * parseFloat(bestfuelgabagool) + parseFloat(bestfuelgabagool)+ 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t2-blazerod") {fuelmultiplier = 16; checkifitst3 = 0; specialfueloutput+= parseFloat(blazerodprice); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(blazeroddistillateprice) + parseFloat(bestsulphuriccoal) + 24 * parseFloat(bestfuelgabagool) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t2-glowstone") {fuelmultiplier = 16; checkifitst3 = 0; specialfueloutput+= parseFloat(glowstonedustprice*2.5); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(glowstonedistillateprice) + parseFloat(bestsulphuriccoal) + 24 * parseFloat(bestfuelgabagool) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t2-magmacream") {fuelmultiplier = 16; checkifitst3 = 0; specialfueloutput+= parseFloat(magmacreamprice*2); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(magmacreamdistillateprice) + parseFloat(bestsulphuriccoal) + 24 * parseFloat(bestfuelgabagool) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t2-netherwart") {fuelmultiplier = 16; checkifitst3 = 0; specialfueloutput+= nparseFloat(etherwartprice*5); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(netherwartdistillateprice) + parseFloat(bestsulphuriccoal) + 24 * parseFloat(bestfuelgabagool) + parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t3-gabagool") {fuelmultiplier = 21; checkifitst3 = 1; specialfueloutput+= parseFloat(crudegabagoolprice); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(gabagooldistillateprice) + 25 * parseFloat(bestsulphuriccoal) + 288 * parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t3-blazerod") {fuelmultiplier = 21; checkifitst3 = 1; specialfueloutput+= parseFloat(blazerodprice); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(blazeroddistillateprice) + 25 * parseFloat(bestsulphuriccoal) + 288 * parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t3-glowstone") {fuelmultiplier = 21; checkifitst3 = 1; specialfueloutput+= parseFloat(glowstonedustprice*2.5); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(glowstonedistillateprice) + 25 * parseFloat(bestsulphuriccoal) + 288 * parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t3-magmacream") {fuelmultiplier = 21; checkifitst3 = 1; specialfueloutput+= parseFloat(magmacreamprice*2); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(magmacreamdistillateprice) + 25 * parseFloat(bestsulphuriccoal) + 288 * parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
+    else if (htmlfueltype == "t3-netherwart") {fuelmultiplier = 21; checkifitst3 = 1; specialfueloutput+= parseFloat(netherwartprice*5); specialproduction += 0.8; 
+        expenses += htmlminioncount * ( 6 * parseFloat(netherwartdistillateprice) + 25 * parseFloat(bestsulphuriccoal) + 288 * parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
 
-    if (minionTier === 't10' || minionTier === 't11') {
-        apexCount = 2;
-    } else if (minionTier) {
-        apexCount = 1;
-    }
+    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS_NO_CHARGES`]?.quick_status[toggleStates[3] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var htmleyedrop = document.getElementById("eyedrops").value;
+    console.log(eyedropbuy);
+    if (checkifitst3 == 1 && htmleyedrop == "yes") { checkifitst3 += 0.3; expenses += parseFloat(eyedropbuy); }
 
-    let usedsite; // Fandom or official wiki rates ?
+    const powercrystalprice = data.products[`POWER_CRYSTAL`]?.quick_status.sellPrice.toFixed(0);
+    const scorchedprice = data.products[`SCORCHED_POWER_CRYSTAL`]?.quick_status.sellPrice.toFixed(0);
+
+    var htmlbeacontier = document.getElementById("beaconlevel").value;
+    if (htmlbeacontier == "1") {extraspeeds += 2; expenses += parseFloat(powercrystalprice)/2;}
+    else if (htmlbeacontier == "1s") {extraspeeds += 3; expenses += parseFloat(scorchedprice)/2}
+    else if (htmlbeacontier == "2") {extraspeeds += 4; expenses += parseFloat(powercrystalprice)/2}
+    else if (htmlbeacontier == "2s") {extraspeeds += 5; expenses += parseFloat(scorchedprice)/2}
+    else if (htmlbeacontier == "3") {extraspeeds += 6; expenses += parseFloat(powercrystalprice)/2}
+    else if (htmlbeacontier == "3s") {extraspeeds += 7; expenses += parseFloat(scorchedprice)/2}
+    else if (htmlbeacontier == "4") {extraspeeds += 8; expenses += parseFloat(powercrystalprice)/2}
+    else if (htmlbeacontier == "4s") {extraspeeds += 9; expenses += parseFloat(scorchedprice)/2}
+    else if (htmlbeacontier == "5") {extraspeeds += 10; expenses += parseFloat(powercrystalprice)/2}    
+    else if (htmlbeacontier == "5s") {extraspeeds += 11; expenses += parseFloat(scorchedprice)/2}
+
+    var htmlinfusion = document.getElementById("infusion").value;
+    if (htmlinfusion == "yes") {extraspeeds += 10}
+    else {extraspeeds += 0}
+
+    var htmlupgrades1 = document.getElementById("upgrades1").value;
+    var htmlupgrades2 = document.getElementById("upgrades2").value;
+    if (htmlupgrades1 == "super-compactor-3000" || htmlupgrades2 == "super-compactor-3000") {
+        compactor = true;
+    } else {compactor = false}
+    if (htmlupgrades1 == "minion-expander") {extraspeeds += 5}
+    if (htmlupgrades2 == "minion-expander") {extraspeeds += 5}
+    if (htmlupgrades1 == "flycatcher") {extraspeeds += 20}
+    if (htmlupgrades2 == "flycatcher") {extraspeeds += 20}      
+    
     let miniondailyprofit;
-    let ceramic = 0;
-    
-    extraspeeds += extraspeedfromminioncount;
-    extraspeeds += beaconlevels[beaconlevel];
-    if (scorchedcrystal == true) { extraspeeds += 1;}
-    if (minionexpander == true) { extraspeeds += 5;} // minionexpander true olunca html'de diğeri false olmalı
-    if (flycatcher == true) {extraspeeds += 20;}
-    if (mithrilinfusion == true) {extraspeeds += 10;}
-    if (usedfuel == tier1) {fuelquality = 11;}
-    else if (usedfuel == tier2) {fuelquality = 16;}
-    else if (usedfuel == tier3) {fuelquality = 21;}
-    if (minionlevel == 10 || minionlevel == 11) {apexcount = 2}
-    else {apexcount = 1}
-    if (usedfuel == tier1 || usedfuel == tier2 || usedfuel == tier3) {
-        ceramic += ceramicprice;
-    }
+    let dailytotalminionactions = 86400 / 2 / (( minionwaitingtime / fuelmultiplier ) / ((100+extraspeeds)/100)); // this many actions per day
+    miniondailyprofit = htmlminioncount * dailytotalminionactions  * (((1-specialproduction)*parseFloat(crudegabagoolprice)) + (specialproduction)*(specialfueloutput) + checkifitst3*(parseFloat(chilipepperprice)/136
+    + parseFloat(vertexprice)/5950 + parseFloat(apexprice) * apexCount / 1309091 + parseFloat(reaperprice) / 458182 + parseFloat(ceramicprice)));
 
-    let minionactualspeed = 86400 / (( minionwaitingtime / fuelquality ) / extraspeeds); // this many actions per day
-    if (usedsite == fandom) {
-        miniondailyprofit = 0;
-    } else if (usedsite == wiki) {
-        miniondailyprofit = 0;
-    }
-}
+    const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    possiblehypergoliccraftingamount = dailytotalminionactions * htmlminioncount / 6912;
+    console.log("possiblehypergoliccraftingamount",possiblehypergoliccraftingamount);
+    profitfromcraftinghypergolicper = parseFloat(hypergolicgabagoolprice) - 75.25 * parseFloat(enchantedsulphurprice) - 6912 * parseFloat(crudegabagoolprice) - 1204 * parseFloat(enchantedcoalprice); 
+    console.log("profitfromcraftinghypergolicper",profitfromcraftinghypergolicper);
+    profitfromcraftinghypergolic = possiblehypergoliccraftingamount * profitfromcraftinghypergolicper
+    var coinsleft = miniondailyprofit - expenses;
+    totalaftereverything = profitfromcraftinghypergolic + coinsleft;
+    
+    
+    minionhourlyprofit = miniondailyprofit / 24;
+    oneminionhourlyprofit = Math.round(minionhourlyprofit / htmlminioncount).toLocaleString();
+    minionhourlyprofit = Math.round(miniondailyprofit / 24).toLocaleString();
+
+    oneminiondailyprofit = Math.round(miniondailyprofit / htmlminioncount).toLocaleString();    
+    miniondailyprofit =  Math.round(miniondailyprofit).toLocaleString();     
+    expenses = Math.round(expenses).toLocaleString();    
+    coinsleft = Math.round(coinsleft).toLocaleString();    
+    profitfromcraftinghypergolic = Math.round(profitfromcraftinghypergolic).toLocaleString();
+    totalaftereverything = Math.round(totalaftereverything).toLocaleString();    
+
+    htmlinfernoresulttext.innerHTML = `One minion makes ${oneminionhourlyprofit} coins per hour and ${oneminiondailyprofit} per day.
+                                        <br> All the minions combined make ${minionhourlyprofit} coins per hour and ${miniondailyprofit} per day.
+                                        <br> Using this fuel and beacon will cost you ${expenses} coins per day.
+                                        <br> That will leave you with ${coinsleft} coins after your expenses.
+                                        <br> However, if you craft your gains into Hypergolic Gabagool, you
+                                        <br> can make ${profitfromcraftinghypergolic} coins more, coming to ${totalaftereverything} coins total.`;}
 
 bazaarconnect();
-
+minionprofits();
 
 

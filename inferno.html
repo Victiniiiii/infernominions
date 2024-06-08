@@ -98,6 +98,7 @@
             flex-direction: column;
             margin-top: 5vh;
             margin-bottom: 5vh;
+            backdrop-filter: blur(5px);
         }
 
         .infernoprofittitle {
@@ -110,6 +111,22 @@
             box-sizing: border-box;
             border: 0.1vw solid white;
             color: white;
+        }
+
+        .infernoprofittitletext {
+            width: 60vw;
+            height: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .infernoprofitcalculatebutton {
+            width: 20vw;
+            height: 5vh;
+            background-color: transparent;
+            color: white;
+            font-size: 1vw;
         }
 
         .infernoprofitrow {
@@ -138,7 +155,12 @@
             width: 5vw;
         }
 
-        #fueltype, #usedsite, #upgrades1, #upgrades2 {
+        #eyedrops {
+            font-size: 1vw;
+            margin-left: 1vw;
+        }
+
+        #fueltype, #upgrades1, #upgrades2 {
             font-size: 1vw;
             margin-left: 1vw;
             width: 9vw;
@@ -150,16 +172,20 @@
             width: 5vw;
         }
 
-        .infernoprofitresults {
+        #infernoprofitresults {
             width: 80vw;
             height: 40vh;
             box-sizing: border-box;
             border: 0.1vw solid white;
+            font-size: 1.5vw;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
     <link rel="icon" href="static/images/vic32.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="static/inferno.css">
     <link rel="stylesheet" type="text/css" href="static/styles.css" media="screen and (min-width: 768px)">
     <link rel="stylesheet" type="text/css" href="static/stylesmini.css" media="screen and (max-width: 767px)">
 </head>
@@ -343,7 +369,8 @@
     
     <div class="infernoprofit">
         <div class="infernoprofittitle">
-            Inferno Minion Profits
+            <div class="infernoprofittitletext">Profit Calculator</div>
+            <button class="infernoprofitcalculatebutton" onclick="minionprofits()">Calculate</button>
         </div>
         <div class="infernoprofitrow">
             <div class="infernoprofitbox">
@@ -388,10 +415,10 @@
                 </select>
             </div>
             <div class="infernoprofitbox">
-                <label for="usedsite">Used Rates:</label>
-                <select id="usedsite" name="usedsite">
-                    <option value="fandom">Fandom</option>
-                    <option value="wiki">Wiki</option>
+                <label for="eyedrops">Capsaicin Eyedrops:</label>
+                <select id="eyedrops" name="eyedrops">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
                 </select>
             </div>
         </div>
@@ -438,11 +465,9 @@
                 </select>
             </div>
         </div>
-        <div class="infernoprofitresults"></div>
-    </div>
+        <div id="infernoprofitresults">
 
-    <div id="infernofuelprices">
-
+        </div>
     </div>
 
     <div id="infernocraftingprofits">
