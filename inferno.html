@@ -11,7 +11,7 @@
             text-align: center;       
             color: white;     
             backdrop-filter: blur(5px);
-            /* TODO: BLUR FOR APPLE-MAC-IPHONE */ 
+            -webkit-backdrop-filter: blur(5px);
         }
 
         #settings-bar {
@@ -99,6 +99,7 @@
             margin-top: 5vh;
             margin-bottom: 5vh;
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .infernoprofittitle {
@@ -182,6 +183,38 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .infernocraftingprofitsrow {
+            width: 80vw;
+            height: 10vh;
+            background-color: blueviolet;
+            color: white;
+            box-sizing: border-box;
+            border: 0.1vw solid white;
+            margin-bottom: 1vh;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #infernoinfo {
+            width: 80vw;
+            height: 80vh;
+            box-sizing: border-box;
+            border: 0.1vw solid white;
+            color: white;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            margin-top: 5vh;
+            margin-bottom: 5vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2vw;
         }
 
     </style>
@@ -465,20 +498,32 @@
                 </select>
             </div>
         </div>
-        <div id="infernoprofitresults">
-
-        </div>
+        <div id="infernoprofitresults"></div>
     </div>
 
     <div id="infernocraftingprofits">
-        <div id="hypergolicgabagool"></div>
-        <div id="bestsulphuriccoal"></div>
-        <!-- profitable crafts -->
-        <!-- sulphuric coal both ways, gummy bear, eyedrops, entropy surpressor, jalapeno book , cayenne, tabasco, fuel gabagool both ways, heavy gabagool, hypergolic-->
+        <div class="infernocraftingprofitsrow" id="hypergolicgabagoolcraft"></div>
+        <div class="infernocraftingprofitsrow" id="sulphuriccoalcraft"></div>
+        <div class="infernocraftingprofitsrow" id="gummybearcraft"></div>
+        <div class="infernocraftingprofitsrow" id="entropycraft"></div>
+        <div class="infernocraftingprofitsrow" id="jalapenocraft"></div>
+        <div class="infernocraftingprofitsrow" id="cayennecraft"></div>
+        <div class="infernocraftingprofitsrow" id="tabascocraft"></div>
+        <div class="infernocraftingprofitsrow" id="eyedropcraft"></div>        
+        <div class="infernocraftingprofitsrow" id="stuffedchilicraft"></div>    
     </div>
 
     <div id="infernoinfo">
-
+        <h1>Questions and Answers</h1>
+        <h3>Disclaimer: items only sold in the auction house are not included in the calculation. </h2>
+        <br>
+        <br>
+        <strong>Is the inferno minion the best minion ?</strong>
+        It may be, but usually it is outmatched by the sheep and slime minions.
+        <strong>Is it worth to switch to infernos ?</strong>
+        Tier 2 Infernos are one of the cheapest and the most profitable setups.
+        <strong>What is the best fuel ?</strong>
+        The best fuel is usually tier 1 gabagool, it can be tier 2 while Jerry is mayor, and tier 3 if the minions are really high leveled.
     </div>
     
     <script src="inferno.js"></script>

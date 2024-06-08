@@ -1,6 +1,6 @@
 // inferno.js
 
-// TODO: Compactors, Numbers cant be negative, T3 profit is very too much from vertexes, Nether wart dist t3 NaN, how much coins under the togglestates
+// TODO: Compactors, Numbers cant be negative, T3 profit is very too much from vertexes, Nether wart dist t3 NaN, how much coins under the togglestates, every item in toggles, clear the code a bit
 function saveToggleStates() {
     localStorage.setItem('toggleStates', JSON.stringify(toggleStates));
 }
@@ -40,32 +40,61 @@ document.querySelectorAll('.toggle-switch').forEach(function(toggleSwitch, index
         console.log(`Toggle ${index + 1} is now ${toggleStates[index] ? 'ON' : 'OFF'}`);
         saveToggleStates(); 
         bazaarconnect();
-        minionprofits();
     });
 });
 
 var htmlinfernoresulttext = document.getElementById("infernoprofitresults");
-    htmlinfernoresulttext.innerHTML = "Press the calculate button at the top right to start.    ";
+htmlinfernoresulttext.innerHTML = "Press the calculate button at the top right to start.";
 
 async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
     const data = await response.json();
+            
+    const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status[toggleStates[0] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);;
+    const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status[toggleStates[1] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status[toggleStates[4] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status[toggleStates[5] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const enchantedsnowprice = data.products[`ENCHANTED_SNOW_BLOCK`]?.quick_status.sellPrice.toFixed(0);
+    const enchantedslimeballprice = data.products[`ENCHANTED_SLIME_BALL`]?.quick_status.sellPrice.toFixed(0); 
+    var sulphuriccoalprice = data.products[`SULPHURIC_COAL`]?.quick_status.sellPrice.toFixed(0); 
+    var kelvininventerprice = data.products[`KELVIN_INVERTER`]?.quick_status.sellPrice.toFixed(0); 
+    var enchantedpaperprice = data.products[`ENCHANTED_PAPER`]?.quick_status.sellPrice.toFixed(0);     
 
-    const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status[toggleStates[7] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-
-    const vertexprice = data.products[`INFERNO_VERTEX`]?.quick_status[toggleStates[20] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const apexprice = data.products[`INFERNO_APEX`]?.quick_status[toggleStates[21] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const reaperprice = data.products[`REAPER_PEPPER`]?.quick_status[toggleStates[22] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status[toggleStates[14] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status[toggleStates[15] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status[toggleStates[18] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var gummyprice = data.products[`REHEATED_GUMMY_POLAR_BEAR`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
     
-    const entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status[toggleStates[14] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status[toggleStates[15] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const tabasco3price = data.products[`ENCHANTMENT_TABASCO_III`]?.quick_status[toggleStates[16] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status[toggleStates[18] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const gummyprice = data.products[`REHEATED_GUMMY_POLAR_BEAR`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    hypergoliccraftprice = 75.25 * parseFloat(enchantedsulphurprice) + 6912 * parseFloat(crudegabagoolprice) + 1204 * parseFloat(enchantedcoalprice); 
+    hypergoliccraftprice = Math.round(hypergoliccraftprice).toLocaleString();
+    hypergolicgabagoolprice = Math.round(hypergolicgabagoolprice).toLocaleString();
+    hypergolicgabagoolcraft.innerHTML = `Crafting hypergolic gabagool costs ${hypergoliccraftprice} and buying it will cost ${hypergolicgabagoolprice} coins.`;
 
+    var sulphuriccoalnopeppers = (parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4;
+    var sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12);
+    sulphuriccoalprice = Math.round(sulphuriccoalprice).toLocaleString();
+    sulphuriccoalnopeppers = Math.round(sulphuriccoalnopeppers).toLocaleString();
+    sulphuriccoalwithpeppers = Math.round(sulphuriccoalwithpeppers).toLocaleString();
+    sulphuriccoalcraft.innerHTML = `Crafting sulphuric coal with no peppers costs ${sulphuriccoalnopeppers} coins, with peppers it costs ${sulphuriccoalwithpeppers} coins, and buying it will cost ${sulphuriccoalprice} coins.`;  
+
+    var gummycraft = parseFloat(enchantedsnowprice) * 4 + parseFloat(enchantedslimeballprice) * 4 + parseFloat(chilipepperprice) * 4;
+    gummycraft = Math.round(gummycraft).toLocaleString();
+    gummyprice = Math.round(gummyprice).toLocaleString();
+    gummybearcraft.innerHTML = `Crafting Re-heated Gummy Polar Bear costs ${gummycraft} coins and buying it costs ${gummyprice} coins.`;
+
+    var entropycraft2 = parseFloat(crudegabagoolprice) * 9216 + parseFloat(enchantedsulphurprice) * 132 + parseFloat(enchantedcoalprice) * 2112 + parseFloat(chilipepperprice) * 32 + parseFloat(kelvininventerprice) * 4;
+    entropycraft2 = Math.round(entropycraft2).toLocaleString();
+    entropysurpressorprice = Math.round(entropysurpressorprice).toLocaleString();
+    entropycraft.innerHTML = `Crafting Entropy Suppressor costs ${entropycraft2} coins and buying it costs ${entropysurpressorprice} coins.`;
+
+    jalapenorecipe = parseFloat(chilipepperprice) * 160 + parseFloat(enchantedpaperprice) * 3 ;
+    jalapenorecipe = Math.round(jalapenorecipe).toLocaleString();
+    jalapenobookprice = Math.round(jalapenobookprice).toLocaleString();
+    jalapenocraft.innerHTML = `Crafting Jalapeno Book costs ${jalapenorecipe} coins and buying it costs ${jalapenobookprice} coins.`;
 }
 
 async function minionprofits() {
@@ -227,9 +256,9 @@ async function minionprofits() {
                                         <br> Using this fuel and beacon will cost you ${expenses} coins per day.
                                         <br> That will leave you with ${coinsleft} coins after your expenses.
                                         <br> However, if you craft your gains into Hypergolic Gabagool, you
-                                        <br> can make ${profitfromcraftinghypergolic} coins more, coming to ${totalaftereverything} coins total.`;}
+                                        <br> can make ${profitfromcraftinghypergolic} coins more, coming to ${totalaftereverything} coins total.`;
+}
 
 bazaarconnect();
-minionprofits();
 
 
