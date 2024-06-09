@@ -61,25 +61,31 @@ async function bazaarconnect() {
     var sulphuriccoalprice = data.products[`SULPHURIC_COAL`]?.quick_status.sellPrice.toFixed(0); 
     var kelvininventerprice = data.products[`KELVIN_INVERTER`]?.quick_status.sellPrice.toFixed(0); 
     var enchantedpaperprice = data.products[`ENCHANTED_PAPER`]?.quick_status.sellPrice.toFixed(0);     
+    var woodsingularityprice = data.products[`WOOD_SINGULARITY`]?.quick_status.sellPrice.toFixed(0);  
+    var enchantedironblockprice = data.products[`ENCHANTED_IRON_BLOCK`]?.quick_status.sellPrice.toFixed(0);     
+    var enchantedbrownmushroomblockprice = data.products[`ENCHANTED_HUGE_MUSHROOM_1`]?.quick_status.sellPrice.toFixed(0);    
+    var enchantedrabbithideprice = data.products[`ENCHANTED_RABBIT_HIDE`]?.quick_status.sellPrice.toFixed(0);     
+    var voltaprice = data.products[`VOLTA`]?.quick_status.sellPrice.toFixed(0);     
 
     var entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status[toggleStates[14] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status[toggleStates[15] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    var habanerotactics5price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_V`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var habanerotactics4price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_4`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status[toggleStates[18] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    var cayenne5price = data.products[`ENCHANTMENT_CAYENNE_V`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var cayenne4price = data.products[`ENCHANTMENT_CAYENNE_4`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    console.log("cayenne4price",cayenne4price);
     var gummyprice = data.products[`REHEATED_GUMMY_POLAR_BEAR`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
     
     hypergoliccraftprice = 75.25 * parseFloat(enchantedsulphurprice) + 6912 * parseFloat(crudegabagoolprice) + 1204 * parseFloat(enchantedcoalprice); 
     hypergoliccraftprice = Math.round(hypergoliccraftprice).toLocaleString();
     hypergolicgabagoolprice = Math.round(hypergolicgabagoolprice).toLocaleString();
-    hypergolicgabagoolcraft.innerHTML = `Crafting hypergolic gabagool costs ${hypergoliccraftprice} and buying it will cost ${hypergolicgabagoolprice} coins.`;
+    hypergolicgabagoolcraft.innerHTML = `Crafting Hypergolic Gabagool costs ${hypergoliccraftprice} and buying it will cost ${hypergolicgabagoolprice} coins.`;
 
     var sulphuriccoalnopeppers = (parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4;
     var sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12);
     sulphuriccoalprice = Math.round(sulphuriccoalprice).toLocaleString();
     sulphuriccoalnopeppers = Math.round(sulphuriccoalnopeppers).toLocaleString();
     sulphuriccoalwithpeppers = Math.round(sulphuriccoalwithpeppers).toLocaleString();
-    sulphuriccoalcraft.innerHTML = `Crafting sulphuric coal with no peppers costs ${sulphuriccoalnopeppers} coins, with peppers it costs ${sulphuriccoalwithpeppers} coins, and buying it will cost ${sulphuriccoalprice} coins.`;  
+    sulphuriccoalcraft.innerHTML = `Crafting Sulphuric Coal with no peppers costs ${sulphuriccoalnopeppers} coins, with peppers it costs ${sulphuriccoalwithpeppers} coins, and buying it will cost ${sulphuriccoalprice} coins.`;  
 
     var gummycraft = parseFloat(enchantedsnowprice) * 4 + parseFloat(enchantedslimeballprice) * 4 + parseFloat(chilipepperprice) * 4;
     gummycraft = Math.round(gummycraft).toLocaleString();
@@ -95,6 +101,21 @@ async function bazaarconnect() {
     jalapenorecipe = Math.round(jalapenorecipe).toLocaleString();
     jalapenobookprice = Math.round(jalapenobookprice).toLocaleString();
     jalapenocraft.innerHTML = `Crafting Jalapeno Book costs ${jalapenorecipe} coins and buying it costs ${jalapenobookprice} coins.`;
+
+    cayennerecipe = parseFloat(chilipepperprice) * 32 + parseFloat(enchantedironblockprice) * 4 + parseFloat(woodsingularityprice);
+    cayenne4price = Math.round(cayenne4price).toLocaleString();
+    cayennerecipe = Math.round(cayennerecipe).toLocaleString();
+    cayennecraft.innerHTML = `Crafting Cayenne IV Book costs ${cayennerecipe} coins and buying it costs ${cayenne4price} coins.`;
+
+    habanerorecipe = parseFloat(stuffedchilipepperprice) * 32 + parseFloat(enchantedbrownmushroomblockprice) * 16 + parseFloat(enchantedrabbithideprice) * 16 + parseFloat(voltaprice) * 8 ;
+    habanerorecipe = Math.round(habanerorecipe).toLocaleString();
+    habanerotactics4price = Math.round(habanerotactics4price).toLocaleString();
+    habanerocraft.innerHTML = `Crafting Habanero Tactics IV Book costs ${habanerorecipe} coins and buying it costs ${habanerotactics4price} coins.`;
+
+    stuffedrecipe = parseFloat(chilipepperprice) * 160;
+    stuffedrecipe = Math.round(stuffedrecipe).toLocaleString();
+    stuffedchilipepperprice = Math.round(stuffedchilipepperprice).toLocaleString();
+    stuffedchilicraft.innerHTML = `Crafting Stuffed Chili Pepper costs ${stuffedrecipe} coins and buying it costs ${stuffedchilipepperprice} coins.`;
 }
 
 async function minionprofits() {
