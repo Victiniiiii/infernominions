@@ -27,7 +27,8 @@
 }
 
 #settings.expanded #toggle-container {
-    height: 75vh;
+    height: 90vh;
+    text-align: center;
 }
 
 .toggle-line {
@@ -76,15 +77,20 @@
 .toggle-group {
     display: flex;
     align-items: center;
-    margin: 1vw;
+    margin: 0.5vh;
     height: 5vh;
+    width: 20vw;
 }
 
 .toggle-groupnames {
     display: flex;
     align-items: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 20vw;
     margin: 0.2vh;
-    height: 2.5vh;
+    height: 2vh;
 }
 
 .toggle-label {
