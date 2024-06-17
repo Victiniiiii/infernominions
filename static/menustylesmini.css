@@ -1,0 +1,158 @@
+body {
+    background-image: url("../static/images/cloud.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Verdana, sans-serif;
+    display: flex;
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title-section {
+    background-image: url("../static/images/thunder.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 0.5vw solid black;
+    margin-bottom: 0.1svh;
+}
+
+.main-menu-button {
+    cursor: pointer;
+    width: 6svh;
+    height: 6svh;
+}
+
+.main-menu-text {
+    width: 50vw;
+    font-size: min(4vw,2svh);
+    text-align: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    color: white;
+    margin: 0;
+}
+
+.project-buttons {
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    top: 0;
+    right: 0;
+}
+
+.category-button {
+    background: white;
+    border: 0.5vw solid black;
+    box-sizing: border-box;
+    font-size: 2vw;
+    color: black;
+    padding: 1vw 1svh;
+    cursor: pointer;
+    margin: 1vw 1svh;
+    position: relative;
+}
+
+.project-box {
+    font-size: 4vw;
+    text-align: center;
+    width: 80vw;
+    height: 100%;
+    margin: 2vw;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    border: 0.05vw solid rgba(0,0,0,0.3);
+    box-sizing: border-box;
+    border-radius: 0.4vw;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0.05vw 0.63vw rgba(255,255,255,0.25);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+}
+
+.project-info {
+    display: flex;
+    font-size: 4vw; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 3svh; 
+}
+
+.project-button {
+    width: 70vw;
+}
+
+.release-date {
+    margin-left: auto; 
+    font-size: min(4vw,2svh); 
+}
+
+.project-content {
+    display: flex;
+    align-items: center;
+}
+
+.project-logo {
+    margin-right: 1vw;
+}
+
+.projectphoto {
+    width: 25vw;
+    height: 25vw;
+}
+
+.project-description {
+    flex: 1; 
+    margin-left: 3vw; 
+}
+
+.placeholder-box {
+    width: 90vw;
+    height: 13svh;
+    background: white;
+    border: 0.5vw solid black;
+    box-sizing: border-box;
+    padding: 2.5vw;
+    text-align: center;
+    margin-top: 30svh;
+}
+
+.contact-box {
+    border: 0.5vw solid white;
+    box-sizing: border-box;
+    padding: 5vw;
+    background-color: black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30svh;
+}
+
+.contact-item {
+    margin: 2.5vw 0;
+}
+
+.contact-item img {
+    vertical-align: middle;
+    margin-right: 2.5vw;
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+}

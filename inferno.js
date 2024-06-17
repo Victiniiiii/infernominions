@@ -1,6 +1,7 @@
 // inferno.js
 
 // TODO: Compactors, Numbers cant be negative, T3 profit is very too much from vertexes, Nether wart dist t3 NaN, how much coins under the togglestates, every item in toggles, clear the code a bit
+// remove console.log stuff
 function saveToggleStates() {
     localStorage.setItem('toggleStates', JSON.stringify(toggleStates));
 }
@@ -49,31 +50,71 @@ htmlinfernoresulttext.innerHTML = "Press the calculate button at the top right t
 async function bazaarconnect() {
     const response = await fetch('https://api.hypixel.net/v2/skyblock/bazaar');
     const data = await response.json();
+
+    /*
+    0. Enchanted Coal
+    1. Enchanted Sulphur
+    2. Chili Pepper
+    3. Eyedrops
+    4. Crude Gabagool
+    5. Very Crude Gabagool
+    6. Hypergolic Gabagool
+    7. Ceramics
+    8. Crude Gabagool Distillate
+    9. Blaze Rod Distillate
+    10. Glowstone Distillate
+    11. Magma Cream Distillate
+    12. Nether Wart Distillate
+    13. Inferno Fuel Block
+    14. Entropy Surpressor
+    15. Jalapeno Book
+    16. Sulphuric Coal
+    17. Habanero Tactics 4
+    18. Stuffed Chili Pepper
+    19. Cayenne 4
+    20. Vertex
+    21. Apex
+    22. Reaper Pepper
+    23. Reheated Gummy
+    24. Enchanted Snow Block
+    25. Enchanted Slimeball
+    26. Kelvin Inventer
+    27. Enchanted Paper
+    28. Wood Singularity
+    29. Enchanted Iron Block
+    30. Enchanted Brown Mushroom Block
+    31. Enchanted Rabbit Hide
+    32. Volta
+    33. Blaze Rod
+    34. Glowstone
+    35. Magma Cream
+    36. Nether Wart
+    37. Power Crystal
+    38. Scorched Power Crystal
+    */
             
     const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status[toggleStates[0] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);;
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status[toggleStates[1] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status[toggleStates[4] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status[toggleStates[5] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    var hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const enchantedsnowprice = data.products[`ENCHANTED_SNOW_BLOCK`]?.quick_status.sellPrice.toFixed(0);
-    const enchantedslimeballprice = data.products[`ENCHANTED_SLIME_BALL`]?.quick_status.sellPrice.toFixed(0); 
-    var sulphuriccoalprice = data.products[`SULPHURIC_COAL`]?.quick_status.sellPrice.toFixed(0); 
-    var kelvininventerprice = data.products[`KELVIN_INVERTER`]?.quick_status.sellPrice.toFixed(0); 
-    var enchantedpaperprice = data.products[`ENCHANTED_PAPER`]?.quick_status.sellPrice.toFixed(0);     
-    var woodsingularityprice = data.products[`WOOD_SINGULARITY`]?.quick_status.sellPrice.toFixed(0);  
-    var enchantedironblockprice = data.products[`ENCHANTED_IRON_BLOCK`]?.quick_status.sellPrice.toFixed(0);     
-    var enchantedbrownmushroomblockprice = data.products[`ENCHANTED_HUGE_MUSHROOM_1`]?.quick_status.sellPrice.toFixed(0);    
-    var enchantedrabbithideprice = data.products[`ENCHANTED_RABBIT_HIDE`]?.quick_status.sellPrice.toFixed(0);     
-    var voltaprice = data.products[`VOLTA`]?.quick_status.sellPrice.toFixed(0);     
-
+    var hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
     var entropysurpressorprice = data.products[`ENTROPY_SUPPRESSOR`]?.quick_status[toggleStates[14] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var jalapenobookprice = data.products[`JALAPENO_BOOK`]?.quick_status[toggleStates[15] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    var sulphuriccoalprice = data.products[`SULPHURIC_COAL`]?.quick_status[toggleStates[16] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);    
     var habanerotactics4price = data.products[`ENCHANTMENT_ULTIMATE_HABANERO_TACTICS_4`]?.quick_status[toggleStates[17] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var stuffedchilipepperprice = data.products[`STUFFED_CHILI_PEPPER`]?.quick_status[toggleStates[18] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var cayenne4price = data.products[`ENCHANTMENT_CAYENNE_4`]?.quick_status[toggleStates[19] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    console.log("cayenne4price",cayenne4price);
     var gummyprice = data.products[`REHEATED_GUMMY_POLAR_BEAR`]?.quick_status[toggleStates[23] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
+    const enchantedsnowprice = data.products[`ENCHANTED_SNOW_BLOCK`]?.quick_status[toggleStates[24] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
+    const enchantedslimeballprice = data.products[`ENCHANTED_SLIME_BALL`]?.quick_status[toggleStates[25] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);    
+    var kelvininventerprice = data.products[`KELVIN_INVERTER`]?.quick_status[toggleStates[26] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);    
+    var enchantedpaperprice = data.products[`ENCHANTED_PAPER`]?.quick_status[toggleStates[27] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);        
+    var woodsingularityprice = data.products[`WOOD_SINGULARITY`]?.quick_status[toggleStates[28] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);     
+    var enchantedironblockprice = data.products[`ENCHANTED_IRON_BLOCK`]?.quick_status[toggleStates[29] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);        
+    var enchantedbrownmushroomblockprice = data.products[`ENCHANTED_HUGE_MUSHROOM_1`]?.quick_status[toggleStates[30] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);       
+    var enchantedrabbithideprice = data.products[`ENCHANTED_RABBIT_HIDE`]?.quick_status[toggleStates[31] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);        
+    var voltaprice = data.products[`VOLTA`]?.quick_status[toggleStates[32] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);     
     
     hypergoliccraftprice = 75.25 * parseFloat(enchantedsulphurprice) + 6912 * parseFloat(crudegabagoolprice) + 1204 * parseFloat(enchantedcoalprice); 
     hypergoliccraftprice = Math.round(hypergoliccraftprice).toLocaleString();
@@ -125,17 +166,27 @@ async function minionprofits() {
 
     const enchantedcoalprice = data.products[`ENCHANTED_COAL`]?.quick_status[toggleStates[0] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);;
     const enchantedsulphurprice = data.products[`ENCHANTED_SULPHUR`]?.quick_status[toggleStates[1] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS_NO_CHARGES`]?.quick_status[toggleStates[3] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const crudegabagoolprice = data.products[`CRUDE_GABAGOOL`]?.quick_status[toggleStates[4] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const verycrudegabagoolprice = data.products[`VERY_CRUDE_GABAGOOL`]?.quick_status[toggleStates[5] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const chilipepperprice = data.products[`CHILI_PEPPER`]?.quick_status[toggleStates[2] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const ceramicprice = data.products[`HYPERGOLIC_IONIZED_CERAMICS`]?.quick_status[toggleStates[7] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status[toggleStates[8] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status[toggleStates[9] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status[toggleStates[10] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status[toggleStates[11] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
+    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status[toggleStates[12] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
+    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status[toggleStates[13] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const vertexprice = data.products[`INFERNO_VERTEX`]?.quick_status[toggleStates[20] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const apexprice = data.products[`INFERNO_APEX`]?.quick_status[toggleStates[21] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     const reaperprice = data.products[`REAPER_PEPPER`]?.quick_status[toggleStates[22] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const magmacreamprice = data.products[`MAGMA_CREAM`]?.quick_status.sellPrice.toFixed(0);
-    const blazerodprice = data.products[`BLAZE_ROD`]?.quick_status.sellPrice.toFixed(0);
-    const netherwartprice = data.products[`NETHER_STALK`]?.quick_status.sellPrice.toFixed(0);
-    const glowstonedustprice = data.products[`GLOWSTONE_DUST`]?.quick_status.sellPrice.toFixed(0);
+    const blazerodprice = data.products[`BLAZE_ROD`]?.quick_status[toggleStates[33] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
+    const glowstonedustprice = data.products[`GLOWSTONE_DUST`]?.quick_status[toggleStates[34] === false ? 'sellPrice' : 'buyPrice'].toFixed(0); 
+    const magmacreamprice = data.products[`MAGMA_CREAM`]?.quick_status[toggleStates[35] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
+    const netherwartprice = data.products[`NETHER_STALK`]?.quick_status[toggleStates[36] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);     
+    const powercrystalprice = data.products[`POWER_CRYSTAL`]?.quick_status[toggleStates[37] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
+    const scorchedprice = data.products[`SCORCHED_POWER_CRYSTAL`]?.quick_status[toggleStates[38] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);   
 
     const sulphuriccoalnopeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice)) / 4).toFixed(0);
     const sulphuriccoalwithpeppers = ((parseFloat(enchantedcoalprice) * 16 + parseFloat(enchantedsulphurprice) + parseFloat(chilipepperprice) * 4) / 12).toFixed(0);
@@ -167,13 +218,6 @@ async function minionprofits() {
     else if (htmlminiontier == "t9") {minionwaitingtime = 760; apexCount = 1;}
     else if (htmlminiontier == "t10") {minionwaitingtime = 728; apexCount = 2;}
     else if (htmlminiontier == "t11") {minionwaitingtime = 697; apexCount = 2;}
-
-    const infernofuelblockprice = data.products[`INFERNO_FUEL_BLOCK`]?.quick_status[toggleStates[13] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const gabagooldistillateprice = data.products[`CRUDE_GABAGOOL_DISTILLATE`]?.quick_status[toggleStates[8] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const blazeroddistillateprice = data.products[`BLAZE_ROD_DISTILLATE`]?.quick_status[toggleStates[9] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const glowstonedistillateprice = data.products[`GLOWSTONE_DISTILLATE`]?.quick_status[toggleStates[10] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const magmacreamdistillateprice = data.products[`MAGMA_CREAM_DISTILLATE`]?.quick_status[toggleStates[11] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
-    const netherwartdistillateprice = data.products[`NETHER_WART_DISTILLATE`]?.quick_status[toggleStates[12] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);       
 
     var htmlfueltype = document.getElementById("fueltype").value;
     var fuelmultiplier = 1;
@@ -212,13 +256,8 @@ async function minionprofits() {
     else if (htmlfueltype == "t3-netherwart") {fuelmultiplier = 21; checkifitst3 = 1; specialfueloutput+= parseFloat(netherwartprice*5); specialproduction += 0.8; 
         expenses += htmlminioncount * ( 6 * parseFloat(netherwartdistillateprice) + 25 * parseFloat(bestsulphuriccoal) + 288 * parseFloat(bestfuelgabagool) + 2 * parseFloat(infernofuelblockprice));}
 
-    const eyedropbuy = data.products[`CAPSAICIN_EYEDROPS_NO_CHARGES`]?.quick_status[toggleStates[3] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     var htmleyedrop = document.getElementById("eyedrops").value;
-    console.log(eyedropbuy);
-    if (checkifitst3 == 1 && htmleyedrop == "yes") { checkifitst3 += 0.3; expenses += parseFloat(eyedropbuy); }
-
-    const powercrystalprice = data.products[`POWER_CRYSTAL`]?.quick_status.sellPrice.toFixed(0);
-    const scorchedprice = data.products[`SCORCHED_POWER_CRYSTAL`]?.quick_status.sellPrice.toFixed(0);
+    if (checkifitst3 == 1 && htmleyedrop == "yes") { checkifitst3 += 0.3; expenses += parseFloat(eyedropbuy)}
 
     var htmlbeacontier = document.getElementById("beaconlevel").value;
     if (htmlbeacontier == "1") {extraspeeds += 2; expenses += parseFloat(powercrystalprice)/2;}
@@ -251,7 +290,6 @@ async function minionprofits() {
     miniondailyprofit = htmlminioncount * dailytotalminionactions  * (((1-specialproduction)*parseFloat(crudegabagoolprice)) + (specialproduction)*(specialfueloutput) + checkifitst3*(parseFloat(chilipepperprice)/136
     + parseFloat(vertexprice)/5950 + parseFloat(apexprice) * apexCount / 1309091 + parseFloat(reaperprice) / 458182 + parseFloat(ceramicprice)));
 
-    const hypergolicgabagoolprice = data.products[`HYPERGOLIC_GABAGOOL`]?.quick_status[toggleStates[6] === false ? 'sellPrice' : 'buyPrice'].toFixed(0);
     possiblehypergoliccraftingamount = dailytotalminionactions * htmlminioncount / 6912;
     console.log("possiblehypergoliccraftingamount",possiblehypergoliccraftingamount);
     profitfromcraftinghypergolicper = parseFloat(hypergolicgabagoolprice) - 75.25 * parseFloat(enchantedsulphurprice) - 6912 * parseFloat(crudegabagoolprice) - 1204 * parseFloat(enchantedcoalprice); 
