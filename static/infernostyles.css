@@ -99,7 +99,7 @@
 
 .infernoprofit {
     width: 80vw;
-    height: 65vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 5vh;
@@ -181,7 +181,7 @@
 
 #infernoprofitresults {
     width: 80vw;
-    height: 40vh;
+    height: 50vh;
     box-sizing: border-box;
     border: 0.1vw solid white;
     font-size: 1.5vw;
