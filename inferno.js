@@ -2,11 +2,17 @@
 
 // TODO: 
 // Compactors 
-// T3 profit is too much 
 // clear the code a bit
+// renovate crafting profits
 // bazı togglelar yine broken
 // q&a düzgün olsun
+// minion crafting recipe ve costları
+// drop rates
+// direk kaldır compactor kısmını ya gerek yok
+// minion profitin cssini bi tık kurcala kutuları eşitle
+// minion profitsde ceramic?
 // font'larda max(width,height) kullan
+
 
 function saveToggleStates() {
     localStorage.setItem('toggleStates', JSON.stringify(toggleStates));
@@ -49,6 +55,7 @@ document.querySelectorAll('.toggle-switch').forEach(function(toggleSwitch, index
         toggleStates[index] = !toggleStates[index];
         saveToggleStates(); 
         everyitemtoggling();
+        bazaarconnect();
     });
 });
 
