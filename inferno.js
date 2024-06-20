@@ -1,8 +1,8 @@
 // inferno.js
 
 // TODO: 
-// Compactors 
-// clear the code a bit
+
+
 // renovate crafting profits
 // bazı togglelar yine broken
 // q&a düzgün olsun
@@ -12,6 +12,7 @@
 // minion profitin cssini bi tık kurcala kutuları eşitle
 // minion profitsde ceramic?
 // font'larda max(width,height) kullan
+// clear the code a bit
 
 
 function saveToggleStates() {
