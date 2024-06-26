@@ -2,16 +2,8 @@
 
 // TODO: 
 
-
-// renovate crafting profits
-// bazı togglelar yine broken
-// q&a düzgün olsun
-// minion crafting recipe ve costları
-// direk kaldır compactor kısmını ya gerek yok
-// minion profitin cssini bi tık kurcala kutuları eşitle
-// minion profitsde ceramic?
 // font'larda max(width,height) kullan
-// clear the code a bit
+// mobil css
 
 
 function saveToggleStates() {
@@ -537,7 +529,7 @@ async function minioncraftingcosts() {
         (data.products[`MOLTEN_POWDER`]?.quick_status[toggleStates[39] ? 'buyPrice' : 'sellPrice'].toFixed(0)),
     ];
 
-    const derelitasheprice = parseFloat(everyitem[5]);
+    const derelictasheprice = parseFloat(everyitem[5]);
     const moltenpowderprice = parseFloat(everyitem[39]);
     const blazerodprice = parseFloat(everyitem[33]);
     const vertexprice = parseFloat(everyitem[20]);
@@ -545,25 +537,69 @@ async function minioncraftingcosts() {
     const blazecrafting1 = blazerodprice * 80;
 
     tiercraftingitems = [
-        "placeholder", 
-        format(derelitasheprice * 80 + blazecrafting1),
-        format(derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 8 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 24 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 56 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 120 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 248 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 504 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 760 + vertexprice * 16 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 1016 + vertexprice * 64 + derelitasheprice * 400 + blazecrafting1),
-        format(moltenpowderprice * 1272 + vertexprice * 112 + apexprice + derelitasheprice * 400 + blazecrafting1), 
+        format(derelictasheprice * 80 + blazecrafting1),
+        format(derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 8 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 24 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 56 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 120 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 248 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 504 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 760 + vertexprice * 16 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 1016 + vertexprice * 64 + derelictasheprice * 400 + blazecrafting1),
+        format(moltenpowderprice * 1272 + vertexprice * 112 + apexprice + derelictasheprice * 400 + blazecrafting1), 
     ];
+
+    tiercraftingitemsderelictashes = [80,400,400,400,400,400,400,400,400,400,400];
+    tiercraftingitemsmoltenpowders = [0,0,8,24,56,120,248,504,760,1016,1272];
+    tiercraftingitemsvertex = [0,0,0,0,0,0,0,0,16,64,112];
+    tiercraftingitemsapex = [0,0,0,0,0,0,0,0,0,0,1];
     
-    for (let i = 1; i <= 11; i++) {
-        let divId = 'infernominioncraftingtier' + i;
+    for (let i = 1; i <= 11; i++) { // blade rod
+        let divId = 'infernominioncraftingtiertext' + i + 'blazerod';
         let divElement = document.getElementById(divId);
         if (divElement) {
-            divElement.innerHTML = `${tiercraftingitems[i]} coins`;
+            divElement.innerHTML = `Blaze Rod costs: ${format(blazecrafting1)} coins.`;
+        }
+    }
+
+    for (let i = 1; i <= 11; i++) { // derelict ashe
+        let divId = 'infernominioncraftingtiertext' + i + 'derelictashe';
+        let divElement = document.getElementById(divId);
+        if (divElement) {
+            divElement.innerHTML = `Derelict Ashe costs: ${format(derelictasheprice*tiercraftingitemsderelictashes[i-1])} coins.`;
+        }
+    }
+
+    for (let i = 3; i <= 11; i++) { // molten powder
+        let divId = 'infernominioncraftingtiertext' + i + 'moltenpowder';
+        let divElement = document.getElementById(divId);
+        if (divElement) {
+            divElement.innerHTML = `Molten Powder costs: ${format(moltenpowderprice*tiercraftingitemsmoltenpowders[i-1])} coins.`;
+        }
+    }
+
+    for (let i = 9; i <= 11; i++) { // vertex
+        let divId = 'infernominioncraftingtiertext' + i + 'infernovertex';
+        let divElement = document.getElementById(divId);
+        if (divElement) {
+            divElement.innerHTML = `Inferno Vertex costs: ${format(vertexprice*tiercraftingitemsvertex[i-1])} coins.`;
+        }
+    }
+
+    for (let i = 11; i <= 11; i++) { // apex
+        let divId = 'infernominioncraftingtiertext' + i + 'infernoapex';
+        let divElement = document.getElementById(divId);
+        if (divElement) {
+            divElement.innerHTML = `Inferno Apex costs: ${format(apexprice*tiercraftingitemsapex[i-1])} coins.`;
+        }
+    }
+
+    for (let i = 1; i <= 11; i++) { // TOTAL
+        let divId = 'infernominioncraftingtiertext' + i + 'total';
+        let divElement = document.getElementById(divId);
+        if (divElement) {
+            divElement.innerHTML = `The total cost is: ${tiercraftingitems[i-1]} coins.`;
         }
     }
 }

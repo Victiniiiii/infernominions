@@ -27,7 +27,7 @@
 }
 
 #settings.expanded #toggle-container {
-    height: 90vh;
+    height: 150vh;
     text-align: center;
 }
 
@@ -77,9 +77,10 @@
 .toggle-group {
     display: flex;
     align-items: center;
-    margin: 0.5vh;
-    height: 5vh;
+    height: 6vh;
     width: 20vw;
+    box-sizing: border-box;
+    border: 0.1vw solid white;
 }
 
 .toggle-groupnames {
@@ -89,8 +90,9 @@
     align-items: center;
     text-align: center;
     width: 20vw;
-    margin: 0.2vh;
-    height: 2vh;
+    height: 3vh;
+    border: 0.1vw solid white;
+    box-sizing: border-box;
 }
 
 .toggle-label {
@@ -164,7 +166,7 @@
 
 #eyedrops {
     font-size: 1vw;
-    margin-left: 1vw;
+    margin-left: 0.5vw;
 }
 
 #fueltype, #upgrades1, #upgrades2 {
@@ -193,7 +195,8 @@
 
 #infernoinfo {
     width: 80vw;
-    height: 80vh;
+    height: auto;
+    padding: 1vw;
     box-sizing: border-box;
     border: 0.1vw solid white;
     color: white;
@@ -210,11 +213,8 @@
 
 #infernodroprates {
     width: 80vw;
-    height: 37.5vh;
-      
+    height: 37.5vh;      
     color: white;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
     background: transparent;
 }
 
@@ -256,6 +256,7 @@
     color: white;
     box-sizing: border-box;
     border: 0.1vw solid white;
+    padding: 1vw;
     margin-bottom: 1vh;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -295,10 +296,67 @@
 }
 
 .infernominioncraftingtier {
-    width: 80vw;
+    width: 40vw;
     height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.infernominioncraftingtiertext {
+    margin-left: 2vw;
+}
+
+.infernominioncraftingtiertextboxes {
+    display: flex;
+    flex-direction: row;
+}
+
+.infernominioncraftingtiertextboxestext {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1vw;
+}
+
+.infernominioncraftingtiertextphoto {
+    display: flex;
+}
+
+#infernoinfotitle {
+    font-size: 3vw;
+    margin-bottom: 5vh;
+}
+
+.infernoinfoquestion {
+    font-weight: bold;
+    font-size: 2vw;
+    margin-bottom: 0.3vh;
+}
+
+.infernoinfoanswer {
+    font-size: 1.6vw;
+    margin-bottom: 4vh;
+}
+
+.toggleitemnamerow {
+    display: flex;
+    flex-direction: column;
+}
+
+.toggleitemname {
+    width: 20vw;
+    height: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 0.1vw solid white;
+}
+
+.fivevhgap {
+    margin-bottom: 3vh;
 }
